@@ -3,21 +3,11 @@
         @click="handleClick"
         :class="[
             'jm-checkbox',
-            checked ? 'jm-checked' : '',
-            disabled ? 'jm-disabled' : ''
+            { checked, disabled, indeterminate: indeterminate && !checked }
         ]"
     >
         <span class="jm-checkbox__input">
-            <span class="jm-checkout__inner">
-                <img
-                    v-if="checked"
-                    :src="checked ? checkIcon : ''"
-                    width="18"
-                    height="18"
-                    alt=""
-                    class="jm-checkbox-img"
-                />
-            </span>
+            <span class="jm-checkout__inner"> </span>
             <span class="jm-checkout__label">
                 <slot></slot>
                 <template v-if="!$slots.default">{{ label }}</template>
@@ -30,30 +20,28 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { getParentGroup } from "../../src/utils/group";
 import JmCheckBoxGroup from "./checkbox-group.vue";
+import { CheckBoxValue, CheckBoxLabel, CheckboxResult } from "./index";
+export { CheckBoxValue, CheckBoxLabel, CheckboxResult };
 
 @Component({})
 export default class JmCheckBox extends Vue {
-    @Prop({ type: String, required: true })
-    public label!: string;
+    @Prop({ type: [Number, String, Boolean] })
+    public label?: CheckBoxLabel;
 
     @Prop({ type: Boolean })
     public value?: boolean;
 
-    @Prop({ type: Boolean, default: false })
-    public disabled!: boolean;
+    @Prop({ type: Boolean })
+    public disabled?: boolean;
 
-    public get checkIcon(): SVGPathElement {
-        return require("./icons/check.svg");
-    }
-    public get halfCheckIcon(): SVGPathElement {
-        return require("./icons/half-check.svg");
-    }
+    @Prop({ type: Boolean })
+    public indeterminate?: boolean;
 
     public get isGroup() {
         return getParentGroup<JmCheckBoxGroup>(this, "JmCheckBoxGroup");
     }
 
-    public get isArray() {
+    public get isArray(): CheckBoxValue {
         if (this.isGroup && Array.isArray(this.isGroup.value)) {
             return this.isGroup?.value;
         }
@@ -62,7 +50,7 @@ export default class JmCheckBox extends Vue {
 
     public get checked() {
         if (this.isGroup && this.isArray.length) {
-            return this.isArray.indexOf(this.label) >= 0;
+            return this.isArray.some((v: CheckBoxLabel) => v === this.label);
         }
         return this.value;
     }
@@ -71,10 +59,16 @@ export default class JmCheckBox extends Vue {
         if (this.disabled) {
             return;
         }
-        if (this.isGroup) {
-            this.isGroup.$updateValue(this.label);
+        const checked = !this.checked;
+        const label = this.label;
+        if (this.isGroup && label !== undefined) {
+            return this.isGroup.$updateValue(checked, label);
         }
-        this.$emit("input", !this.value);
+        this.$emit("input", checked);
+        this.$emit("change", {
+            label,
+            checked
+        } as CheckboxResult);
     }
 }
 </script>
@@ -86,6 +80,29 @@ export default class JmCheckBox extends Vue {
     font-size: 14px;
     color: #333;
     cursor: pointer;
+
+    &.checked {
+        .jm-checkout__inner {
+            background: @--theme-color url("./icons/check.svg") center center
+                no-repeat;
+            border: none;
+        }
+    }
+    &.indeterminate {
+        .jm-checkout__inner {
+            background: @--theme-color url("./icons/half-check.svg") center
+                center no-repeat;
+            border: none;
+        }
+    }
+    &.disabled {
+        color: #c0c4cc;
+        opacity: 0.6;
+        cursor: not-allowed;
+        .jm-checkout__inner {
+            background-color: #c0c4cc;
+        }
+    }
 }
 .jm-checkbox-img {
     -webkit-tap-highlight-color: transparent;
@@ -113,17 +130,7 @@ export default class JmCheckBox extends Vue {
     background-color: #fff;
 }
 
-.jm-checked {
-    .jm-checkout__inner {
-        background-color: @--theme-color;
-    }
-}
-.jm-disabled {
-    color: #c0c4cc;
-    opacity: 0.6;
-    cursor: not-allowed;
-    .jm-checkout__inner {
-        background-color: #c0c4cc;
-    }
+.jm-checkout__label {
+    padding-left: 8px;
 }
 </style>

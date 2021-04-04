@@ -6,7 +6,7 @@
         <JmRadio v-model="radio" label="3" :disabled="true">禁用</JmRadio>
 
         <!-- 单选组 -->
-        <div style="padding: 20px; border: 10px solid #ccc">
+        <div>
             <JmRadioGroup v-model="radio">
                 <JmRadio label="4">备选项</JmRadio>
                 <JmRadio label="5">备选项</JmRadio>
@@ -14,7 +14,7 @@
         </div>
 
         <!-- 数组对象 -->
-        <div style="padding: 20px; border: 10px solid #ccc">
+        <div>
             <JmRadio
                 v-model="model"
                 v-for="item of modelList"
@@ -30,9 +30,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import JmRadio, { RadioItem } from "../package/radio"
-import JmRadioGroup from "../package/radio-group"
+import { Component, Vue } from "vue-property-decorator";
+import JmRadio, { RadioItem } from "../package/radio";
+import JmRadioGroup from "../package/radio-group";
 @Component<ExampleRadio>({
     components: {
         JmRadio,
@@ -40,12 +40,12 @@ import JmRadioGroup from "../package/radio-group"
     }
 })
 export default class ExampleRadio extends Vue {
-    public radio = "5"
+    public radio = "5";
 
-    public model = this.modelList[0].value
+    public model = this.modelList[0].value;
 
     public get findModel() {
-        return this.modelList.find((item) => item.value === this.model)
+        return this.modelList.find((item) => item.value === this.model);
     }
 
     public get modelList() {
@@ -62,11 +62,11 @@ export default class ExampleRadio extends Vue {
                 label: "王五",
                 value: "3"
             }
-        ]
+        ];
     }
 
     public change(item: RadioItem) {
-        console.log(this.model, this.findModel)
+        console.log(this.model, this.findModel);
     }
 }
 </script>
