@@ -21,7 +21,6 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import { getParentGroup } from "../../src/utils/group";
 import JmCheckBoxGroup from "./checkbox-group.vue";
 import { CheckBoxValue, CheckBoxLabel, CheckboxResult } from "./index";
-export { CheckBoxValue, CheckBoxLabel, CheckboxResult };
 
 @Component({})
 export default class JmCheckBox extends Vue {

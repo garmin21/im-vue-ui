@@ -28,7 +28,9 @@
                     全选
                 </JmCheckBox>
             </label>
-            <JmCheckBoxGroup v-model="checkList2" @change="handleCheckedCitiesChange">
+            <JmCheckBoxGroup 
+                v-model="checkList2" 
+                @change="handleCheckedCitiesChange">
                 <JmCheckBox :label="1" />
                 <JmCheckBox :label="2" />
                 <JmCheckBox :label="3" />
