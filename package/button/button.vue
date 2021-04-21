@@ -1,8 +1,5 @@
 <template>
-    <button
-        @click="handleClick"
-        :class="['jm-button', `jm-button-${type}`, `jm-button-${size}`]"
-    >
+    <button @click="handleClick" :class="classe">
         <slot />
     </button>
 </template>
@@ -31,6 +28,21 @@ export default class JmButton extends Vue {
         }
     })
     public size!: string;
+
+    // 朴素按钮
+    @Prop({ type: Boolean, default: false })
+    public plain!: boolean;
+
+    public get classe() {
+        return [
+            "jm-button",
+            `jm-button-${this.type}`,
+            `jm-button-${this.size}`,
+            {
+                [`jm-button-plain`]: this.plain
+            }
+        ];
+    }
 
     public handleClick(evt: Event) {
         this.$emit("click", evt);
@@ -88,10 +100,36 @@ export default class JmButton extends Vue {
     padding: 0 12px;
     font-size: 12px;
 }
-
 .jm-button-large {
     width: 100%;
     height: 48px;
     line-height: 46px;
+}
+.jm-button-plain {
+    background-color: @--theme-white;
+    &.jm-button-primary {
+        color: @button-bk-primary;
+        border-color: @button-bk-primary;
+    }
+    &.jm-button-info {
+        color: @button-bk-info;
+        border-color: @button-bk-info;
+    }
+    &.jm-button-default {
+        color: @button-bk-default;
+        border-color: @button-bk-default;
+    }
+    &.jm-button-error {
+        color: @button-bk-error;
+        border-color: @button-bk-error;
+    }
+    &.jm-button-warning {
+        color: @button-bk-warning;
+        border-color: @button-bk-warning;
+    }
+    &.jm-button-success {
+        color: @button-bk-success;
+        border-color: @button-bk-success;
+    }
 }
 </style>

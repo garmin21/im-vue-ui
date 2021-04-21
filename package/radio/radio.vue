@@ -15,54 +15,54 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
-import { getParentGroup } from "../../src/utils/group"
-import JmRadioGroup from "./group.vue"
-import { RadioValue, RadioItem } from "./index"
+import { Component, Vue, Prop } from "vue-property-decorator";
+import { getParentGroup } from "../../src/utils/group";
+import JmRadioGroup from "./group.vue";
+import { RadioValue, RadioItem } from "./index";
 
 @Component<JmRadio>({})
 export default class JmRadio extends Vue {
     @Prop({ type: [String, Number, Boolean], required: true })
-    public label!: RadioValue
+    public label!: RadioValue;
 
     @Prop({ type: [String, Number, Boolean] })
-    public value?: RadioValue
+    public value?: RadioValue;
 
     @Prop({ type: Boolean, default: false })
-    public disabled!: boolean
+    public disabled!: boolean;
 
     @Prop({
         type: Object
     })
-    public item?: RadioItem
+    public item?: RadioItem;
 
-    public parent: JmRadioGroup | null = null
+    public parent: JmRadioGroup | null = null;
 
     public get checked() {
         if (this.isGroup) {
-            return this.label === this.isGroup.value
+            return this.label === this.isGroup.value;
         }
-        return this.label === this.value
+        return this.label === this.value;
     }
 
     public get isGroup() {
-        return getParentGroup<JmRadioGroup>(this, "JmRadioGroup")
+        return getParentGroup<JmRadioGroup>(this, "JmRadioGroup");
     }
 
     public handleClick() {
         if (this.disabled || this.checked) {
-            return
+            return;
         }
         if (this.isGroup) {
-            return this.isGroup.$updateValue(this.label)
+            return this.isGroup.$updateValue(this.label);
         }
         if (this.item) {
-            this.$emit("input", this.item.value)
-            this.$emit("change", this.item)
-            return
+            this.$emit("input", this.item.value);
+            this.$emit("change", this.item);
+            return;
         }
-        this.$emit("input", this.label)
-        this.$emit("change", this.label)
+        this.$emit("input", this.label);
+        this.$emit("change", this.label);
     }
 }
 </script>
@@ -89,7 +89,6 @@ export default class JmRadio extends Vue {
 }
 .jm-radio__label {
     margin-left: 5px;
-    padding-left: 8px;
 }
 
 .jm-checked {

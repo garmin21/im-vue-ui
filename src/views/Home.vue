@@ -6,6 +6,8 @@
         <!-- <Popper /> -->
         <ExampleTextarea />
         <ExampleButton />
+        <ExampleTree />
+        <ExampleInputNumber />
     </div>
 </template>
 
@@ -17,14 +19,18 @@ import Popper from "../../example/example-popper.vue";
 import ExampleDropdown from "../../example/example-dropdown.vue";
 import ExampleTextarea from "../../example/example-textarea.vue";
 import ExampleButton from "../../example/example-button.vue";
+import ExampleTree from "../../example/example-tree.vue";
+import ExampleInputNumber from "../../example/example-input-number.vue";
 @Component({
     components: {
+        ExampleInputNumber,
         ExampleRadio,
         ExampleCheckBox,
         ExampleDropdown,
         Popper,
         ExampleTextarea,
-        ExampleButton
+        ExampleButton,
+        ExampleTree
     }
 })
 export default class Home extends Vue {}
