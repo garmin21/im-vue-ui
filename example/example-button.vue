@@ -22,6 +22,64 @@
             <JmButton type="primary" plain size="small">small</JmButton>
             <JmButton type="info" plain size="small">small</JmButton>
         </section>
+        <section>
+            <h3>禁用状态</h3>
+            <JmButton type="primary" plain :disabled="true" size="small">
+                small
+            </JmButton>
+            <JmButton type="info" plain :disabled="true" size="small">
+                small
+            </JmButton>
+        </section>
+        <section>
+            <h3>按钮形状</h3>
+            <JmButton type="primary"> 矩形按钮 </JmButton>
+            <JmButton type="info" :round="true"> 圆形按钮 </JmButton>
+        </section>
+        <section>
+            <h3>加载状态</h3>
+            <JmButton type="primary" loading> 矩形按钮 </JmButton>
+            <JmButton type="info" loading :round="true"> 圆形按钮 </JmButton>
+        </section>
+        <section>
+            <h3>图标按钮</h3>
+            <JmButton type="primary">
+                <img
+                    src="../src/assets/logo.png"
+                    width="20"
+                    height="20"
+                    style="padding-right: 5px"
+                />
+                <span>图标按钮</span>
+            </JmButton>
+            <JmButton type="info">
+                <img
+                    src="../src/assets/logo.png"
+                    width="20"
+                    height="20"
+                    style="padding-right: 5px"
+                />
+                <span>图标按钮</span>
+            </JmButton>
+        </section>
+        <section>
+            <h3>自定义颜色</h3>
+            <JmButton type="primary" :color="{ color: '#7232dd' }">
+                单色按钮
+            </JmButton>
+            <JmButton type="info" :color="{ color: '#7232dd' }" :round="true">
+                单色按钮
+            </JmButton>
+            <JmButton
+                type="info"
+                :color="{
+                    color: 'linear-gradient(to right, #ff6034, #ee0a24)'
+                }"
+                :round="true"
+            >
+                渐变色按钮
+            </JmButton>
+        </section>
     </div>
 </template>
 
@@ -36,3 +94,5 @@ import JmButton from "../package/button";
 })
 export default class ExampleButton extends Vue {}
 </script>
+
+<style lang="less" scoped></style>

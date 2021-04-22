@@ -1,13 +1,28 @@
 <template>
-    <button @click="handleClick" :class="classe">
-        <slot />
+    <button
+        @click="handleClick"
+        :style="getStyle"
+        :class="classe"
+        :disabled="disabled"
+    >
+        <img
+            src="./icons/loading.svg"
+            v-if="loading"
+            class="jm-button-loading"
+            width="20"
+            height="20"
+            alt="loading"
+        />
+        <div class="jm-button-label">
+            <slot />
+        </div>
     </button>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import {} from "vue";
 import { Type, Size } from "./index";
-
 @Component({})
 export default class JmButton extends Vue {
     // 类型
@@ -32,6 +47,23 @@ export default class JmButton extends Vue {
     // 朴素按钮
     @Prop({ type: Boolean, default: false })
     public plain!: boolean;
+    // 禁用状态
+    @Prop({ type: Boolean, default: false })
+    public disabled!: boolean;
+    // 是否为圆角按钮
+    @Prop({ type: Boolean, default: false })
+    public round!: boolean;
+    // 加载状态
+    @Prop({ type: Boolean, default: false })
+    public loading!: boolean;
+    // 自定义按钮颜色
+    @Prop({
+        type: Object,
+        default: (): Partial<CSSStyleDeclaration> => {
+            return {};
+        }
+    })
+    public color!: Partial<CSSStyleDeclaration>;
 
     public get classe() {
         return [
@@ -39,12 +71,25 @@ export default class JmButton extends Vue {
             `jm-button-${this.type}`,
             `jm-button-${this.size}`,
             {
-                [`jm-button-plain`]: this.plain
+                [`jm-button-plain`]: this.plain,
+                [`jm-button-disabled`]: this.disabled,
+                [`jm-button-round`]: this.round,
+                [`loading`]: this.loading
             }
         ];
     }
 
+    public get getStyle() {
+        const style: Partial<CSSStyleDeclaration> = {};
+        const { color } = this.color;
+        if (this.plain) return {};
+        style.background = color;
+        style.color = "#fff";
+        return style;
+    }
+
     public handleClick(evt: Event) {
+        if (this.disabled || this.loading) return;
         this.$emit("click", evt);
     }
 }
@@ -55,14 +100,17 @@ export default class JmButton extends Vue {
 @import "../theme-chalk/button.less";
 
 .jm-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
     outline: none;
     border: none;
     height: 38px;
+    line-height: 38px;
     color: @--theme-white;
     border: 1px solid transparent;
     cursor: pointer;
     font-size: 14px;
-    display: inline-block;
     box-sizing: border-box;
     transition: opacity 0.2s;
     -webkit-appearance: none;
@@ -72,6 +120,7 @@ export default class JmButton extends Vue {
         opacity: 0.6;
     }
 }
+// .jm-button >
 .jm-button-primary {
     background-color: @button-bk-primary;
 }
@@ -130,6 +179,37 @@ export default class JmButton extends Vue {
     &.jm-button-success {
         color: @button-bk-success;
         border-color: @button-bk-success;
+    }
+}
+.jm-button-disabled {
+    cursor: not-allowed;
+    opacity: 0.68;
+}
+.jm-button-round {
+    border-radius: 25px;
+}
+.loading {
+    display: inline-flex;
+    align-items: center;
+    .jm-button-loading {
+        width: 20px;
+        height: 20px;
+        cursor: default;
+        animation: __jm-button-loading-keyframes 0.5s infinite linear;
+    }
+}
+
+.jm-button-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+@keyframes __jm-button-loading-keyframes {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 </style>
