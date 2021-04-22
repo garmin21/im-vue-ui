@@ -67,7 +67,7 @@
             <JmButton type="primary" :color="{ color: '#7232dd' }">
                 单色按钮
             </JmButton>
-            <JmButton type="info" :color="{ color: '#7232dd' }" :round="true">
+            <JmButton type="info" :color="{ color: '#ccc' }" :round="true">
                 单色按钮
             </JmButton>
             <JmButton

@@ -102,6 +102,7 @@ export default class JmButton extends Vue {
 .jm-button {
     position: relative;
     display: inline-flex;
+    justify-content: center;
     align-items: center;
     outline: none;
     border: none;
@@ -128,7 +129,7 @@ export default class JmButton extends Vue {
     background-color: @button-bk-info;
 }
 .jm-button-default {
-    color: #ccc;
+    color: #ccc !important;
     background-color: @button-bk-default;
 }
 .jm-button-error {
