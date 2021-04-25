@@ -49,6 +49,7 @@ export default class JmCollapseItem extends Vue {
     public get active() {
         if (this.isGroup) {
             if (this.isGroup && this.isGroup.accordion) {
+                // todo 如何让当前项可以开启或关闭，其他项隐藏
                 return this.isGroup.value === this.name;
             }
             return this.isGroup.value.includes(this.name);
