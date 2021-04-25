@@ -8,6 +8,7 @@
         <ExampleButton />
         <ExampleTree />
         <ExampleInputNumber />
+        <ExampleCollapse />
     </div>
 </template>
 
@@ -21,8 +22,10 @@ import ExampleTextarea from "../../example/example-textarea.vue";
 import ExampleButton from "../../example/example-button.vue";
 import ExampleTree from "../../example/example-tree.vue";
 import ExampleInputNumber from "../../example/example-input-number.vue";
+import ExampleCollapse from "../../example/example-collapse.vue";
 @Component({
     components: {
+        ExampleCollapse,
         ExampleInputNumber,
         ExampleRadio,
         ExampleCheckBox,
