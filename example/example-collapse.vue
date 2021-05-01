@@ -58,6 +58,6 @@ import JmCollapseItem from "../package/collapse-item";
 })
 export default class ExampleCollapse extends Vue {
     public activeNames: string[] = [];
-    public activeName: string = "1";
+    public activeName: string = "";
 }
 </script>

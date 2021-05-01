@@ -27,18 +27,19 @@ export default class JmCollapse extends Vue {
         return [`jm-collapse`];
     }
 
-    public $updateValue(label: string) {
+    public $updateValue(name: string) {
         const value = this.value;
         if (Array.isArray(value)) {
-            const index = value.findIndex((key) => key === label);
+            const index = value.findIndex((key) => key === name);
             if (index < 0) {
-                return this.$emit("input", value.concat([label]));
+                return this.$emit("input", value.concat([name]));
             }
             const arr = value.slice(0);
             arr.splice(index, 1);
             this.$emit("input", arr);
         } else {
-            this.$emit("input", label);
+            // todo 如何支持手风琴模式
+            this.$emit("input", name);
         }
     }
 }

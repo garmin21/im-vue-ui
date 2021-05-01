@@ -5,6 +5,7 @@
             <template v-if="!$slots.default">{{ label }}</template>
         </div>
         <div class="fm-counter-inner" :class="{ active: focus || autofocus }">
+            <!-- todo 将来替换为icon图标 -->
             <span
                 class="btn prev"
                 :class="{ allowed: allowedMinus }"

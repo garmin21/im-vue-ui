@@ -1,11 +1,5 @@
 <template>
-    <label
-        @click="handleClick"
-        :class="[
-            'jm-checkbox',
-            { checked, disabled, indeterminate: indeterminate && !checked }
-        ]"
-    >
+    <label @click="handleClick" :class="classes">
         <span class="jm-checkbox__input">
             <span class="jm-checkout__inner"> </span>
             <span class="jm-checkout__label">
@@ -35,6 +29,17 @@ export default class JmCheckBox extends Vue {
 
     @Prop({ type: Boolean })
     public indeterminate?: boolean;
+
+    public get classes() {
+        return [
+            "jm-checkbox",
+            {
+                checked: this.checked,
+                disabled: this.disabled,
+                indeterminate: this.indeterminate && !this.checked
+            }
+        ];
+    }
 
     public get isGroup() {
         return getParentGroup<JmCheckBoxGroup>(this, "JmCheckBoxGroup");

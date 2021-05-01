@@ -9,6 +9,7 @@
         <ExampleTree />
         <ExampleInputNumber />
         <ExampleCollapse />
+        <ExampleToast />
     </div>
 </template>
 
@@ -23,6 +24,7 @@ import ExampleButton from "../../example/example-button.vue";
 import ExampleTree from "../../example/example-tree.vue";
 import ExampleInputNumber from "../../example/example-input-number.vue";
 import ExampleCollapse from "../../example/example-collapse.vue";
+import ExampleToast from "../../example/example-toast.vue";
 @Component({
     components: {
         ExampleCollapse,
@@ -33,7 +35,8 @@ import ExampleCollapse from "../../example/example-collapse.vue";
         Popper,
         ExampleTextarea,
         ExampleButton,
-        ExampleTree
+        ExampleTree,
+        ExampleToast
     }
 })
 export default class Home extends Vue {}

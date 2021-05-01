@@ -48,10 +48,6 @@ export default class JmCollapseItem extends Vue {
 
     public get active() {
         if (this.isGroup) {
-            if (this.isGroup && this.isGroup.accordion) {
-                // todo 如何让当前项可以开启或关闭，其他项隐藏
-                return this.isGroup.value === this.name;
-            }
             return this.isGroup.value.includes(this.name);
         }
         return this.name === this.value;
@@ -83,8 +79,9 @@ export default class JmCollapseItem extends Vue {
             this.isGroup.$updateValue(this.name);
         } else {
             const name = this.name;
-            this.$emit("input", name);
-            this.$emit("change", name);
+            const active = this.active;
+            this.$emit("input", name, active);
+            this.$emit("change", name, active);
         }
     }
 }
