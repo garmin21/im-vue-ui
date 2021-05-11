@@ -1,0 +1,30 @@
+<template>
+    <div>
+        <h1>drawer</h1>
+        <section>
+            <h3>基本使用</h3>
+            <button @click="visible = !visible">按钮</button>
+            <JmDrawer :visible="visible" @close="visible = false">
+                <h1>title</h1>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Necessitatibus id, omnis odio eum doloremque atque fugit
+                laudantium nesciunt deserunt, unde sit placeat deleniti
+                consequuntur nostrum suscipit ex vel at? Repudiandae!
+            </JmDrawer>
+        </section>
+    </div>
+</template>
+
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+import JmDrawer from "../package/drawer";
+
+@Component({
+    components: {
+        JmDrawer
+    }
+})
+export default class ExampleDrawer extends Vue {
+    public visible = false;
+}
+</script>

@@ -10,6 +10,8 @@
         <ExampleInputNumber />
         <ExampleCollapse />
         <ExampleToast />
+        <ExampleSwitch />
+        <ExampleDrawer />
     </div>
 </template>
 
@@ -25,8 +27,11 @@ import ExampleTree from "../../example/example-tree.vue";
 import ExampleInputNumber from "../../example/example-input-number.vue";
 import ExampleCollapse from "../../example/example-collapse.vue";
 import ExampleToast from "../../example/example-toast.vue";
+import ExampleSwitch from "../../example/example-switch.vue";
+import ExampleDrawer from "../../example/example-drawer.vue";
 @Component({
     components: {
+        ExampleSwitch,
         ExampleCollapse,
         ExampleInputNumber,
         ExampleRadio,
@@ -36,7 +41,8 @@ import ExampleToast from "../../example/example-toast.vue";
         ExampleTextarea,
         ExampleButton,
         ExampleTree,
-        ExampleToast
+        ExampleToast,
+        ExampleDrawer
     }
 })
 export default class Home extends Vue {}
