@@ -1,32 +1,6 @@
 # vue-ui
 
-## Project setup
-
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-
-```
-yarn build
-```
-
-### Lints and fixes files
-
-```
-yarn lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+vue2.0 class 写法的 vue 组件库
 
 ### 中介者设计模式
 
