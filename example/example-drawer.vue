@@ -3,7 +3,7 @@
         <h1>drawer</h1>
         <section>
             <h3>基本使用</h3>
-            <button @click="visible = !visible">按钮</button>
+            <JmButton @click="visible = !visible">打开抽屉</JmButton>
             <JmDrawer :visible="visible" @close="visible = false">
                 <h1>title</h1>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -18,10 +18,11 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import JmDrawer from "../package/drawer";
-
+import JmButton from "../package/button";
 @Component({
     components: {
-        JmDrawer
+        JmDrawer,
+        JmButton
     }
 })
 export default class ExampleDrawer extends Vue {
