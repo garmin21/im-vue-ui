@@ -12,6 +12,7 @@
         <ExampleToast />
         <ExampleSwitch />
         <ExampleDrawer />
+        <ExampleProgress />
     </div>
 </template>
 
@@ -29,6 +30,7 @@ import ExampleCollapse from "../../example/example-collapse.vue";
 import ExampleToast from "../../example/example-toast.vue";
 import ExampleSwitch from "../../example/example-switch.vue";
 import ExampleDrawer from "../../example/example-drawer.vue";
+import ExampleProgress from "../../example/example-progress.vue";
 @Component({
     components: {
         ExampleSwitch,
@@ -42,7 +44,8 @@ import ExampleDrawer from "../../example/example-drawer.vue";
         ExampleButton,
         ExampleTree,
         ExampleToast,
-        ExampleDrawer
+        ExampleDrawer,
+        ExampleProgress
     }
 })
 export default class Home extends Vue {}

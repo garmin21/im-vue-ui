@@ -11,7 +11,12 @@
                 :class="{ allowed: allowedMinus }"
                 @click="hanndelClick(mathematics.MINUS)"
             >
-                -
+                <img
+                    src="./icon/minus.svg"
+                    width="20"
+                    height="15"
+                    alt="minus"
+                />
             </span>
             <input
                 v-model="num"
@@ -30,7 +35,7 @@
                 :class="{ allowed: allowedPlus }"
                 @click="hanndelClick(mathematics.PLUS)"
             >
-                +
+                <img src="./icon/puls.svg" width="20" height="15" alt="puls" />
             </span>
         </div>
     </div>
@@ -138,7 +143,6 @@ export default class JmInputNumber extends Vue {
     width: 40px;
     height: auto;
     color: #767676;
-    font-size: 13px;
     font-size: 24px;
     text-align: center;
     background: #f5f6f7;

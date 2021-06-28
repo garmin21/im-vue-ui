@@ -4,7 +4,6 @@
       "module": "esnext", // 生成代码的标准模板
       "moduleResolution": "node", // 模块解析策略，ts 默认使用node 的解析策略，即使用相对路径导入
       "esModuleInterop": true, // 允许 export 导出
-      "experimentalDecorators": true, // 配置装饰器
       "allowJs": true, // 允许编译器编译JS，JSX文件
       "sourceMap": true, // 生成目标文件的 SourceMap 文件
       "strict": true,  // 开启严格模式
@@ -13,6 +12,8 @@
       "skipLibCheck": true, //
       "noImplicitAny": false, // 不允许隐式的any类型
       "resolveJsonModule": true, //
+      "experimentalDecorators": true, // 启用装饰器
+      "emitDecoratorMetadata": true, // 为装饰器提供元数据的支持
       "baseUrl": "./", //
       "typeRoots": [
           "./types/*" //
