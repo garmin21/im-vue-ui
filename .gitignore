@@ -3,7 +3,14 @@
 /dist
 /public
 
+deploy.sh
+.prettierrc
+.yarnrc
+tsconfig.json
+vue.config.js
+package.json
 
+/package
 # local env files
 .env.local
 .env.*.local
