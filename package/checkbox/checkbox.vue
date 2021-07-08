@@ -16,7 +16,7 @@ import { getParentGroup } from "../../src/utils/group";
 import JmCheckBoxGroup from "./checkbox-group.vue";
 import { CheckBoxValue, CheckBoxLabel, CheckboxResult } from "./index";
 
-@Component({})
+@Component<JmCheckBox>({})
 export default class JmCheckBox extends Vue {
     @Prop({ type: [Number, String, Boolean] })
     public label?: CheckBoxLabel;
