@@ -63,7 +63,7 @@ export default class JmButton extends Vue {
             return {};
         }
     })
-    public color!: Partial<CSSStyleDeclaration>;
+    public componentStyle!: Partial<CSSStyleDeclaration>;
 
     public get classe() {
         return [
@@ -80,12 +80,8 @@ export default class JmButton extends Vue {
     }
 
     public get getStyle() {
-        const style: Partial<CSSStyleDeclaration> = {};
-        const { color } = this.color;
         if (this.plain) return {};
-        style.background = color;
-        style.color = "#fff";
-        return style;
+        return this.componentStyle;
     }
 
     public handleClick(evt: Event) {

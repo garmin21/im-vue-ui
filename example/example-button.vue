@@ -64,15 +64,19 @@
         </section>
         <section>
             <h3>自定义颜色</h3>
-            <JmButton type="primary" :color="{ color: '#7232dd' }">
-                单色按钮
-            </JmButton>
-            <JmButton type="info" :color="{ color: '#ccc' }" :round="true">
+            <JmButton type="primary" :componentStyle="{ color: '#7232dd' }">
                 单色按钮
             </JmButton>
             <JmButton
                 type="info"
-                :color="{
+                :componentStyle="{ color: '#ccc' }"
+                :round="true"
+            >
+                单色按钮
+            </JmButton>
+            <JmButton
+                type="info"
+                :componentStyle="{
                     color: 'linear-gradient(to right, #ff6034, #ee0a24)'
                 }"
                 :round="true"
