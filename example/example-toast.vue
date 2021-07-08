@@ -10,11 +10,6 @@
             <JmButton type="success" @click="success">成功</JmButton>
             <JmButton type="primary" @click="loading">loading</JmButton>
         </section>
-
-        <section>
-            <h1>被当作消息通知</h1>
-            <JmButton type="info" @click="message">信息</JmButton>
-        </section>
     </div>
 </template>
 
@@ -71,38 +66,6 @@ export default class ExampleToast extends Vue {
             type: "loading",
             message: "loading"
         });
-    }
-
-    public message() {
-        toast({
-            type: "info",
-            message: "这是一个消息通知!!!!!",
-            duration: 11000000
-        });
-    }
-
-    public mounted() {
-        const H1Constructor = Vue.extend(Toast);
-        const instance = new H1Constructor({
-            el: document.createElement("div"),
-            data: () => {
-                return {
-                    msg: "ppppp"
-                };
-            },
-            props: ["type", "message"],
-            propsData: {
-                // propsData 传递数据
-                type: "success",
-                message: "oooooooooooo"
-            }
-        });
-        console.log(instance.$el, "pppppppppppp");
-        console.log(instance.$data, "pppppppppppp");
-        console.log(instance.msg, "pppppppppppp");
-        console.log(instance.type, "pppppppppppp");
-        console.log(instance.message, "pppppppppppp");
-        // document.body.appendChild();
     }
 }
 </script>
