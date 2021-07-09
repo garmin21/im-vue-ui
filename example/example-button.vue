@@ -98,5 +98,3 @@ import JmButton from "../package/button";
 })
 export default class ExampleButton extends Vue {}
 </script>
-
-<style lang="less" scoped></style>

@@ -13,6 +13,7 @@
         <ExampleSwitch />
         <ExampleDrawer />
         <ExampleProgress />
+        <ExampleUpload style="margin-top: 1000px" />
     </div>
 </template>
 
@@ -31,6 +32,7 @@ import ExampleToast from "../../example/example-toast.vue";
 import ExampleSwitch from "../../example/example-switch.vue";
 import ExampleDrawer from "../../example/example-drawer.vue";
 import ExampleProgress from "../../example/example-progress.vue";
+import ExampleUpload from "../../example/example-upload.vue";
 @Component({
     components: {
         ExampleSwitch,
@@ -45,7 +47,8 @@ import ExampleProgress from "../../example/example-progress.vue";
         ExampleTree,
         ExampleToast,
         ExampleDrawer,
-        ExampleProgress
+        ExampleProgress,
+        ExampleUpload
     }
 })
 export default class Home extends Vue {}
