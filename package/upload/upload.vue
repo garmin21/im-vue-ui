@@ -1,6 +1,10 @@
 <template>
     <section :class="classes">
-        <div :class="[`${prefixcls}__upload_btn`]" @click="handelUploadClick">
+        <div
+            v-if="!params.src"
+            :class="[`${prefixcls}__upload_btn`]"
+            @click="handelUploadClick"
+        >
             <slot>
                 <div class="tips-module">
                     <img
@@ -13,7 +17,16 @@
                 </div>
             </slot>
         </div>
-
+        <div v-if="params.src" :class="[`${prefixcls}__upload_image`]">
+            <img
+                :src="params.src"
+                class="image"
+                width="300"
+                height="150"
+                :alt="params.name"
+                :title="params.name"
+            />
+        </div>
         <input
             :class="[`${prefixcls}__upload__file`]"
             type="file"
@@ -29,7 +42,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { PREFIXCLS } from "../theme-chalk/var";
-import { UploadFile } from "./index";
+import { UploadFile, UploadParams } from "./index";
 import { uploadImage, UploadImageOption } from "./request/request";
 @Component({})
 export default class JmUpload extends Vue {
@@ -117,6 +130,13 @@ export default class JmUpload extends Vue {
     public files: UploadFile[] = [];
     public tempIndex = 0;
 
+    // ----
+    public params: UploadParams = {
+        name: "",
+        src: ""
+    };
+    // ----
+
     public get classes() {
         return [`${this.prefixcls}__upload`];
     }
@@ -147,15 +167,9 @@ export default class JmUpload extends Vue {
             name: this.name,
             file: file.raw,
             formData: this.formData,
-            onHandelSuccess: this.onHandelSuccess
-                ? this.onHandelSuccess?.bind(this)
-                : () => {},
-            onHandelError: this.onHandelError
-                ? this.onHandelError?.bind(this)
-                : () => {},
-            onHandelProgress: this.onHandelProgress
-                ? this.onHandelProgress?.bind(this)
-                : () => {}
+            onHandelSuccess: this.handleSuccess.bind(this, file),
+            onHandelError: this.handleError.bind(this, file),
+            onHandelProgress: this.handleProgress.bind(this, file)
         };
 
         file.status = "pending";
@@ -179,6 +193,25 @@ export default class JmUpload extends Vue {
 
     public handelUploadClick() {
         (this.$refs.JmFile as HTMLElement).click();
+    }
+
+    public handleProgress(file: UploadFile, event: any) {
+        file.percent = event.percent;
+        this.onHandelProgress && this.onHandelProgress(file);
+    }
+
+    public handleSuccess(file: UploadFile, response: any) {
+        if (response) {
+            file.status = "success";
+            this.params.src = response.data.path;
+            this.params.name = response.data.filename;
+            this.onHandelSuccess && this.onHandelSuccess(response);
+        }
+    }
+
+    public handleError(file: UploadFile, error: any) {
+        file.status = "failure";
+        this.onHandelError && this.onHandelError(error);
     }
 }
 </script>
@@ -210,6 +243,14 @@ export default class JmUpload extends Vue {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.@{--prefixcls}__upload_image {
+    width: 100%;
+    height: 100%;
+    .image {
+        object-fit: cover;
+    }
 }
 
 .tips-module {

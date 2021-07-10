@@ -10,4 +10,9 @@ export interface UploadFile {
     raw: File; // 原生文件对象
 }
 
+export interface UploadParams {
+    src: string;
+    name: string;
+}
+
 export default JmUpload;
