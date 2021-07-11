@@ -1,32 +1,9 @@
 <template>
     <section :class="classes">
-        <div
-            v-if="!params.src"
-            :class="[`${prefixcls}__upload_btn`]"
-            @click="handelUploadClick"
-        >
-            <slot>
-                <div class="tips-module">
-                    <img
-                        src="./icon/upload.svg"
-                        alt="icon"
-                        width="24"
-                        height="24"
-                    />
-                    <p class="tips-text">Upload</p>
-                </div>
-            </slot>
+        <div :class="[`${prefixcls}__upload_btn`]" @click="handelUploadClick">
+            <slot />
         </div>
-        <div v-if="params.src" :class="[`${prefixcls}__upload_image`]">
-            <img
-                :src="params.src"
-                class="image"
-                width="300"
-                height="150"
-                :alt="params.name"
-                :title="params.name"
-            />
-        </div>
+        <UploadImagesPreview v-if="fileList.length" :fileList="fileList" />
         <input
             :class="[`${prefixcls}__upload__file`]"
             type="file"
@@ -42,9 +19,14 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { PREFIXCLS } from "../theme-chalk/var";
-import { UploadFile, UploadParams } from "./index";
+import { UploadFile, FileList } from "./index";
 import { uploadImage, UploadImageOption } from "./request/request";
-@Component({})
+import UploadImagesPreview from "./components/upload-images-preview.vue";
+@Component({
+    components: {
+        UploadImagesPreview
+    }
+})
 export default class JmUpload extends Vue {
     /**
      * 是否多选
@@ -101,6 +83,15 @@ export default class JmUpload extends Vue {
     public action!: string;
 
     /**
+     * 上传图片列表
+     */
+    @Prop({
+        type: Array,
+        required: true
+    })
+    public fileList!: FileList;
+
+    /**
      * 上传前的钩子函数
      */
     @Prop({
@@ -130,13 +121,6 @@ export default class JmUpload extends Vue {
     public files: UploadFile[] = [];
     public tempIndex = 0;
 
-    // ----
-    public params: UploadParams = {
-        name: "",
-        src: ""
-    };
-    // ----
-
     public get classes() {
         return [`${this.prefixcls}__upload`];
     }
@@ -161,7 +145,7 @@ export default class JmUpload extends Vue {
         });
     }
     // request upload
-    public upload(file: UploadFile) {
+    public async upload(file: UploadFile) {
         const options: UploadImageOption = {
             url: this.action,
             name: this.name,
@@ -173,8 +157,7 @@ export default class JmUpload extends Vue {
         };
 
         file.status = "pending";
-        const res = uploadImage(options);
-        res.then(options.onHandelSuccess, options.onHandelError);
+        await uploadImage(options);
     }
 
     public normalizeFiles(rawFile: File) {
@@ -201,11 +184,17 @@ export default class JmUpload extends Vue {
     }
 
     public handleSuccess(file: UploadFile, response: any) {
+        console.log(response);
         if (response) {
             file.status = "success";
-            this.params.src = response.data.path;
-            this.params.name = response.data.filename;
-            this.onHandelSuccess && this.onHandelSuccess(response);
+            const { uid } = file;
+            const {
+                data: { path, filename }
+            } = response;
+            const newFiles = this.fileList.concat([
+                { uid, name: filename, url: path }
+            ] as FileList);
+            this.onHandelSuccess && this.onHandelSuccess(newFiles);
         }
     }
 
@@ -220,49 +209,20 @@ export default class JmUpload extends Vue {
 @import "../theme-chalk/var.less";
 .@{--prefixcls}__upload {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 100%;
     width: 100%;
-    border: 1px dotted #e0e0e0;
-    border-radius: 12px;
     cursor: pointer;
 }
 
 .@{--prefixcls}__upload__file {
-    width: 100%;
-    height: 100%;
+    width: inherit;
+    height: inherit;
     display: none;
     cursor: pointer;
 }
 
 .@{--prefixcls}__upload_btn {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.@{--prefixcls}__upload_image {
-    width: 100%;
-    height: 100%;
-    .image {
-        object-fit: cover;
-    }
-}
-
-.tips-module {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.tips-text {
-    margin-top: 8px;
-    color: #333;
-    font-size: 14px;
-    line-height: 20px;
+    width: inherit;
+    height: inherit;
 }
 </style>

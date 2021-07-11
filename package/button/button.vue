@@ -1,7 +1,7 @@
 <template>
     <button
         @click="handleClick"
-        :style="getStyle"
+        :style="componentStyle"
         :class="classe"
         :disabled="disabled"
     >
@@ -21,8 +21,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import {} from "vue";
 import { Type, Size } from "./index";
+
 @Component({})
 export default class JmButton extends Vue {
     // 类型
@@ -34,6 +34,7 @@ export default class JmButton extends Vue {
         }
     })
     public type!: string;
+
     // 按钮大小
     @Prop({
         type: String,
@@ -47,23 +48,22 @@ export default class JmButton extends Vue {
     // 朴素按钮
     @Prop({ type: Boolean, default: false })
     public plain!: boolean;
+
     // 禁用状态
     @Prop({ type: Boolean, default: false })
     public disabled!: boolean;
+
     // 是否为圆角按钮
     @Prop({ type: Boolean, default: false })
     public round!: boolean;
+
     // 加载状态
     @Prop({ type: Boolean, default: false })
     public loading!: boolean;
+
     // 自定义按钮颜色
-    @Prop({
-        type: Object,
-        default: (): Partial<CSSStyleDeclaration> => {
-            return {};
-        }
-    })
-    public componentStyle!: Partial<CSSStyleDeclaration>;
+    @Prop({ type: Object })
+    public componentStyle?: Partial<CSSStyleDeclaration>;
 
     public get classe() {
         return [
@@ -77,11 +77,6 @@ export default class JmButton extends Vue {
                 [`loading`]: this.loading
             }
         ];
-    }
-
-    public get getStyle() {
-        if (this.plain) return {};
-        return this.componentStyle;
     }
 
     public handleClick(evt: Event) {

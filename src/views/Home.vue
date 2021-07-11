@@ -13,7 +13,7 @@
         <ExampleSwitch />
         <ExampleDrawer />
         <ExampleProgress />
-        <ExampleUpload style="margin-top: 1000px" />
+        <ExampleUpload />
     </div>
 </template>
 
