@@ -209,14 +209,12 @@ export default class JmUpload extends Vue {
 @import "../theme-chalk/var.less";
 .@{--prefixcls}__upload {
     position: relative;
-    height: 100%;
     width: 100%;
+    height: 100%;
     cursor: pointer;
 }
 
 .@{--prefixcls}__upload__file {
-    width: inherit;
-    height: inherit;
     display: none;
     cursor: pointer;
 }
