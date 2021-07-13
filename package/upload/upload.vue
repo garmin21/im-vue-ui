@@ -3,7 +3,11 @@
         <div :class="[`${prefixcls}__upload_btn`]" @click="handelUploadClick">
             <slot />
         </div>
-        <UploadImagesPreview v-if="fileList.length" :fileList="fileList" />
+        <UploadImagesPreview
+            @on-delete="handelClickDelete"
+            v-if="fileList.length"
+            :fileList="fileList"
+        />
         <input
             :class="[`${prefixcls}__upload__file`]"
             type="file"
@@ -19,7 +23,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { PREFIXCLS } from "../theme-chalk/var";
-import { UploadFile, FileList } from "./index";
+import { UploadFile, FileList, FileListItem } from "./index";
 import { uploadImage, UploadImageOption } from "./request/request";
 import UploadImagesPreview from "./components/upload-images-preview.vue";
 @Component({
@@ -103,7 +107,7 @@ export default class JmUpload extends Vue {
      * 上传成功回调函数
      */
     @Prop({ type: Function })
-    public onHandelSuccess?: (evt: any) => any;
+    public onSuccess?: (evt: any) => any;
 
     /**
      * 上传失败回调函数
@@ -132,7 +136,9 @@ export default class JmUpload extends Vue {
         const total = fileList.length + this.files.length;
 
         if (this.limit < total) {
-            return console.error("上传数量不匹配");
+            return console.error(
+                "The agreed upload quantity does not match!!!"
+            );
         }
         this.startUpload(fileList);
     }
@@ -151,7 +157,7 @@ export default class JmUpload extends Vue {
             name: this.name,
             file: file.raw,
             formData: this.formData,
-            onHandelSuccess: this.handleSuccess.bind(this, file),
+            onSuccess: this.handleSuccess.bind(this, file),
             onHandelError: this.handleError.bind(this, file),
             onHandelProgress: this.handleProgress.bind(this, file)
         };
@@ -178,6 +184,10 @@ export default class JmUpload extends Vue {
         (this.$refs.JmFile as HTMLElement).click();
     }
 
+    public handelClickDelete(item: FileListItem[]) {
+        this.$emit("on-delete", item);
+    }
+
     public handleProgress(file: UploadFile, event: any) {
         file.percent = event.percent;
         this.onHandelProgress && this.onHandelProgress(file);
@@ -194,7 +204,7 @@ export default class JmUpload extends Vue {
             const newFiles = this.fileList.concat([
                 { uid, name: filename, url: path }
             ] as FileList);
-            this.onHandelSuccess && this.onHandelSuccess(newFiles);
+            this.onSuccess && this.onSuccess(newFiles);
         }
     }
 

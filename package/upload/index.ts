@@ -10,8 +10,10 @@ export interface UploadFile {
     raw: File; // 原生文件对象
 }
 
-export type FileList = Array<
-    { name: string; url: string } & Pick<UploadFile, "uid">
+export type FileListItem = { name: string; url: string } & Pick<
+    UploadFile,
+    "uid"
 >;
+export type FileList = Array<FileListItem>;
 
 export default JmUpload;

@@ -7,7 +7,8 @@
                 :limit="3"
                 :action="action"
                 :fileList="fileList"
-                :onHandelSuccess="onHandelSuccess"
+                :on-success="handelSuccess"
+                @on-delete="handelClickDelete"
             >
                 <JmButton> Click as Upload </JmButton>
             </JmUpload>
@@ -18,8 +19,9 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import JmUpload, { FileList } from "../package/upload";
+import JmUpload, { FileListItem } from "../package/upload";
 import JmButton from "../package/button";
+import { toast } from "../package/toast/index";
 @Component({
     components: {
         JmUpload,
@@ -29,10 +31,18 @@ import JmButton from "../package/button";
 export default class ExampleUpload extends Vue {
     public action = `http://localhost:3000/upload`;
 
-    public fileList: FileList = [];
+    public fileList: FileListItem[] = [];
 
-    public onHandelSuccess(fileList: FileList) {
+    public handelSuccess(fileList: FileListItem[]) {
         this.fileList = fileList;
+    }
+
+    public async handelClickDelete(fileList: FileListItem[]) {
+        this.fileList = fileList;
+        await toast({
+            type: "success",
+            message: "删除成功"
+        });
     }
 }
 </script>

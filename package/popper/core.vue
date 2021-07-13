@@ -73,19 +73,17 @@ export default class Core extends Vue {
 
 <style lang="less" scoped>
 .model {
+    display: none;
     width: 200px;
     height: 200px;
-}
-
-.model {
     background: #333;
     color: white;
     font-weight: bold;
     padding: 4px 8px;
     font-size: 13px;
     border-radius: 4px;
-    display: none;
 }
+
 .show {
     display: block;
 }
