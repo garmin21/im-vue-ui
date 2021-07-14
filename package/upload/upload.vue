@@ -33,7 +33,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { PREFIXCLS } from "../theme-chalk/var";
-import { UploadFile, FileList, FileListItem } from "./index";
+import { UploadFile, UploadItem } from "./index";
 import { uploadImage, UploadImageOption } from "./request/request";
 import UploadImagesPreview from "./components/upload-images-preview.vue";
 import UploadDragger from "./components/upload-dragger.vue";
@@ -119,7 +119,7 @@ export default class JmUpload extends Vue {
         type: Array,
         required: true
     })
-    public fileList!: FileList;
+    public fileList!: UploadItem[];
 
     /**
      * 上传前的钩子函数
@@ -211,7 +211,7 @@ export default class JmUpload extends Vue {
         (this.$refs.JmFile as HTMLElement).click();
     }
 
-    public handelClickDelete(item: FileListItem[]) {
+    public handelClickDelete(item: UploadItem[]) {
         this.$emit("on-delete", item);
     }
 
@@ -229,7 +229,7 @@ export default class JmUpload extends Vue {
             } = response;
             const newFiles = this.fileList.concat([
                 { uid, name: filename, url: path }
-            ] as FileList);
+            ] as UploadItem[]);
             this.onSuccess && this.onSuccess(newFiles);
         }
     }

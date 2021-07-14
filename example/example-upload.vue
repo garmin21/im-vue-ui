@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import JmUpload, { FileListItem } from "../package/upload";
+import JmUpload, { UploadItem } from "../package/upload";
 import JmButton from "../package/button";
 import { toast } from "../package/toast/index";
 @Component({
@@ -46,17 +46,17 @@ import { toast } from "../package/toast/index";
 export default class ExampleUpload extends Vue {
     public action = `http://localhost:3000/upload`;
 
-    public fileList: FileListItem[] = [];
-    public fileList1: FileListItem[] = [];
+    public fileList: UploadItem[] = [];
+    public fileList1: UploadItem[] = [];
 
-    public handelSuccess(fileList: FileListItem[]) {
+    public handelSuccess(fileList: UploadItem[]) {
         this.fileList = fileList;
     }
-    public handelSuccess1(fileList: FileListItem[]) {
+    public handelSuccess1(fileList: UploadItem[]) {
         this.fileList1 = fileList;
     }
 
-    public async handelClickDelete(fileList: FileListItem[]) {
+    public async handelClickDelete(fileList: UploadItem[]) {
         this.fileList = fileList;
         await toast({
             type: "success",
@@ -64,7 +64,7 @@ export default class ExampleUpload extends Vue {
         });
     }
 
-    public async handelClickDelete1(fileList: FileListItem[]) {
+    public async handelClickDelete1(fileList: UploadItem[]) {
         this.fileList1 = fileList;
         await toast({
             type: "success",
