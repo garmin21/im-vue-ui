@@ -37,6 +37,7 @@ import { UploadFile, FileList, FileListItem } from "./index";
 import { uploadImage, UploadImageOption } from "./request/request";
 import UploadImagesPreview from "./components/upload-images-preview.vue";
 import UploadDragger from "./components/upload-dragger.vue";
+
 @Component({
     components: {
         UploadImagesPreview,
@@ -138,13 +139,13 @@ export default class JmUpload extends Vue {
      * 上传失败回调函数
      */
     @Prop({ type: Function })
-    public onHandelError?: (evt: any) => any;
+    public onError?: (evt: any) => any;
 
     /**
      * 上传进度回调函数
      */
     @Prop({ type: Function })
-    public onHandelProgress?: (evt: any) => any;
+    public onProgress?: (evt: any) => any;
 
     public prefixcls = PREFIXCLS;
     public files: UploadFile[] = [];
@@ -184,8 +185,8 @@ export default class JmUpload extends Vue {
             file: file.raw,
             formData: this.formData,
             onSuccess: this.handleSuccess.bind(this, file),
-            onHandelError: this.handleError.bind(this, file),
-            onHandelProgress: this.handleProgress.bind(this, file)
+            onError: this.handleError.bind(this, file),
+            onProgress: this.handleProgress.bind(this, file)
         };
 
         file.status = "pending";
@@ -216,11 +217,10 @@ export default class JmUpload extends Vue {
 
     public handleProgress(file: UploadFile, event: any) {
         file.percent = event.percent;
-        this.onHandelProgress && this.onHandelProgress(file);
+        this.onProgress && this.onProgress(file);
     }
 
     public handleSuccess(file: UploadFile, response: any) {
-        console.log(response);
         if (response) {
             file.status = "success";
             const { uid } = file;
@@ -236,7 +236,7 @@ export default class JmUpload extends Vue {
 
     public handleError(file: UploadFile, error: any) {
         file.status = "failure";
-        this.onHandelError && this.onHandelError(error);
+        this.onError && this.onError(error);
     }
 }
 </script>

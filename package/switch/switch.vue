@@ -5,7 +5,7 @@
             :name="name"
             :disabled="disabled"
             :checked="value"
-            class="jm-btn"
+            :class="[`${prefixcls}__switch__input`]"
             @change="handelChecked"
         />
     </label>
@@ -14,6 +14,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { PREFIXCLS } from "../theme-chalk/var";
+
 @Component<JmSwitch>({})
 export default class JmSwitch extends Vue {
     @Prop({ type: [Boolean, Number, String], default: false })
@@ -25,9 +26,17 @@ export default class JmSwitch extends Vue {
     @Prop({ type: Boolean, default: false })
     public disabled!: boolean;
 
+    public get prefixcls() {
+        return PREFIXCLS;
+    }
+
     public get classes() {
-        const { disabled } = this;
-        return [`${PREFIXCLS}-switch`, { "is-disabled": disabled }];
+        return [
+            `${this.prefixcls}__switch`,
+            {
+                [`${this.prefixcls}__switch--disabled`]: this.disabled
+            }
+        ];
     }
 
     public handelChecked(evt: InputEvent) {
@@ -40,58 +49,63 @@ export default class JmSwitch extends Vue {
 </script>
 
 <style lang="less" scoped>
-@import "../theme-chalk/config.less";
+@import "../theme-chalk/var.less";
 
-.@{--prefixcls}-switch {
+.@{--prefixcls}__switch {
+    --color-error: #eb4e5c;
+    --color-success: #1fbb95;
+    --color-white: #fff;
+
+    position: relative;
     display: flex;
-    align-items: center;
     width: 40px;
     height: 20px;
-    border-color: rgb(255, 73, 73);
-    background-color: rgb(255, 73, 73);
+    align-items: center;
+    border-color: var(--color-error);
+    background-color: var(--color-error);
     border-radius: 20px;
-    position: relative;
     overflow: hidden;
     opacity: 1;
+}
 
-    .jm-btn {
-        cursor: pointer;
+.@{--prefixcls}__switch__input {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    margin: 0;
+    visibility: hidden;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        content: "";
+        border-radius: 50%;
+        background-color: var(--color-white);
+        visibility: visible;
+        transition: transform 0.3s ease;
+    }
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        margin: 0;
-        visibility: hidden;
-        &::after {
-            content: "";
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            width: 50%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: #ffffff;
-            visibility: visible;
-            transition: transform 0.3s ease;
-        }
-        &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            visibility: visible;
-            transition: all 0.4s ease;
-        }
-        &:checked::after {
-            transform: translateX(calc(100%));
-        }
-        &:checked::before {
-            border-color: rgb(19, 206, 102);
-            background-color: rgb(19, 206, 102);
-        }
+        content: "";
+        visibility: visible;
+        transition: all 0.4s ease;
+    }
+
+    &:checked::after {
+        transform: translateX(calc(100%));
+    }
+
+    &:checked::before {
+        border-color: var(--color-success);
+        background-color: var(--color-success);
     }
 }
-// .@{--prefixcls}.is-disabled {
-//     opacity: 0.6;
-// }
 </style>

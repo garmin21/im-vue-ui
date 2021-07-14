@@ -28,6 +28,14 @@ const routes: Array<RouteConfig> = [
                     import(/* image */ "../example/example-image.vue").then(
                         (m) => m.default
                     )
+            },
+            {
+                path: "switch",
+                name: "switch",
+                component: () =>
+                    import(/* switch */ "../example/example-switch.vue").then(
+                        (m) => m.default
+                    )
             }
         ]
     }

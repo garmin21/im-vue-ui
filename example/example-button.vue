@@ -48,8 +48,6 @@
                     src="../src/assets/logo.png"
                     width="20"
                     height="20"
-                    style="padding-right: 5px"
-                />
                 <span>图标按钮</span>
             </JmButton>
             <JmButton type="info">
@@ -57,7 +55,6 @@
                     src="../src/assets/logo.png"
                     width="20"
                     height="20"
-                    style="padding-right: 5px"
                 />
                 <span>图标按钮</span>
             </JmButton>

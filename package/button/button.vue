@@ -100,7 +100,6 @@ export default class JmButton extends Vue {
     height: 38px;
     line-height: 38px;
     color: @--theme-white;
-    border: 1px solid transparent;
     cursor: pointer;
     font-size: 14px;
     box-sizing: border-box;
@@ -108,6 +107,7 @@ export default class JmButton extends Vue {
     -webkit-appearance: none;
     user-select: none;
     touch-action: manipulation;
+
     &:active {
         opacity: 0.6;
     }
@@ -116,73 +116,92 @@ export default class JmButton extends Vue {
 .jm-button-primary {
     background-color: @button-bk-primary;
 }
+
 .jm-button-info {
     background-color: @button-bk-info;
 }
+
 .jm-button-default {
     color: #ccc !important;
     background-color: @button-bk-default;
 }
+
 .jm-button-error {
     background-color: @button-bk-error;
 }
+
 .jm-button-warning {
     background-color: @button-bk-warning;
 }
+
 .jm-button-success {
     background-color: @button-bk-success;
 }
+
 .jm-button-normal {
     padding: 0 18px;
 }
+
 .jm-button-small {
     height: 28px;
     line-height: 26px;
     padding: 0 12px;
     font-size: 12px;
 }
+
 .jm-button-large {
     width: 100%;
     height: 48px;
     line-height: 46px;
 }
+
 .jm-button-plain {
     background-color: @--theme-white;
+
     &.jm-button-primary {
         color: @button-bk-primary;
         border-color: @button-bk-primary;
     }
+
     &.jm-button-info {
         color: @button-bk-info;
         border-color: @button-bk-info;
     }
+
     &.jm-button-default {
         color: @button-bk-default;
         border-color: @button-bk-default;
     }
+
     &.jm-button-error {
         color: @button-bk-error;
         border-color: @button-bk-error;
     }
+
     &.jm-button-warning {
         color: @button-bk-warning;
         border-color: @button-bk-warning;
     }
+
     &.jm-button-success {
         color: @button-bk-success;
         border-color: @button-bk-success;
     }
 }
+
 .jm-button-disabled {
     cursor: not-allowed;
     opacity: 0.68;
 }
+
 .jm-button-round {
     border-radius: 25px;
 }
+
 .loading {
     display: inline-flex;
     align-items: center;
+
     .jm-button-loading {
         width: 20px;
         height: 20px;
@@ -196,10 +215,12 @@ export default class JmButton extends Vue {
     align-items: center;
     justify-content: space-between;
 }
+
 @keyframes __jm-button-loading-keyframes {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
