@@ -17,10 +17,6 @@ module.exports = {
             "display",
             "width",
             "height"
-        ],
-        'no-descending-specificity': null,
-        'no-empty-source': null,
-        'declaration-colon-newline-after': null,
-        'font-family-no-missing-generic-family-keyword': null
+        ]
     }
 }

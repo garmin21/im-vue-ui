@@ -1,12 +1,22 @@
 <template>
     <section :class="classes">
-        <div :class="[`${prefixcls}__upload_btn`]" @click="handelUploadClick">
+        <UploadDragger
+            v-if="drag"
+            @handle-files="startUpload"
+            @handle-click="handelUploadClick"
+        />
+        <div
+            v-else
+            :class="[`${prefixcls}__upload_btn`]"
+            @click="handelUploadClick"
+        >
             <slot />
         </div>
         <UploadImagesPreview
             @on-delete="handelClickDelete"
             v-if="fileList.length"
             :fileList="fileList"
+            :preview="preview"
         />
         <input
             :class="[`${prefixcls}__upload__file`]"
@@ -14,7 +24,7 @@
             :multiple="multiple"
             :accept="accept"
             :name="name"
-            @change="hadelChangeFile"
+            @change="handleChangeFile"
             ref="JmFile"
         />
     </section>
@@ -26,9 +36,11 @@ import { PREFIXCLS } from "../theme-chalk/var";
 import { UploadFile, FileList, FileListItem } from "./index";
 import { uploadImage, UploadImageOption } from "./request/request";
 import UploadImagesPreview from "./components/upload-images-preview.vue";
+import UploadDragger from "./components/upload-dragger.vue";
 @Component({
     components: {
-        UploadImagesPreview
+        UploadImagesPreview,
+        UploadDragger
     }
 })
 export default class JmUpload extends Vue {
@@ -37,6 +49,19 @@ export default class JmUpload extends Vue {
      */
     @Prop({ type: Boolean, default: false })
     public multiple!: boolean;
+
+    /**
+     * 是否开启图片预览
+     */
+    @Prop({ type: Boolean, default: false })
+    public preview!: boolean;
+
+    /**
+     * 是否开启拖拽上传
+     */
+    @Prop({ type: Boolean, default: false })
+    public drag!: boolean;
+
     /**
      * 上传文件格式
      */
@@ -129,10 +154,11 @@ export default class JmUpload extends Vue {
         return [`${this.prefixcls}__upload`];
     }
 
-    public hadelChangeFile(evt: Event) {
+    public handleChangeFile(evt: Event) {
         const fileList: File[] = Array.from(
             (evt.target as HTMLInputElement).files || []
         );
+
         const total = fileList.length + this.files.length;
 
         if (this.limit < total) {
