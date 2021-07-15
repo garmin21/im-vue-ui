@@ -77,22 +77,27 @@ export default class JmTree extends Vue {
     align-items: center;
     cursor: pointer;
 }
+
 .tree__label {
     color: #767676;
     font-size: 14px;
 }
+
 .tree__icon {
     width: 12px;
     height: 12px;
     padding: 6px;
 }
+
 .tree__list {
     padding-left: 15px;
 }
+
 .down {
     background: transparent url("./image/down.svg") no-repeat center center;
     background-size: 12px 12px;
 }
+
 .right {
     background: transparent url("./image/right.svg") no-repeat center center;
     background-size: 12px 12px;

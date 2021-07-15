@@ -1,27 +1,50 @@
-// /**
-//  * 对象去重
-//  */
+/**
+ * 对象去重
+ */
 
-// const ObjectDeduplication = <T>(list: Array<T>, uid: string) => {
-//     const numbers = list.map((item) => item[uid]);
-//     console.log(numbers);
-//     return list.filter((item) => {
-//         console.log(!new Set(numbers).has(item[uid]));
-//     });
-// };
+const ObjectDeduplication = <T>(list: Array<T>, pix: string) => {
+    return Object.values(
+        list.reduce((prev, cur) => {
+            prev[cur[pix]] = prev;
+            return prev;
+        }, {})
+    );
+};
 
-// interface Item {
-//     uid: string;
-// }
+interface Item {
+    uid: number;
+    name: string;
+}
 
-// const arr: Item[] = [
-//     { uid: "1" },
-//     { uid: "3" },
-//     { uid: "3" },
-//     { uid: "3" },
-//     { uid: "4" }
-// ];
+const arr: Item[] = [
+    {
+        uid: 1,
+        name: "eeeeeeeeeee"
+    },
+    {
+        uid: 2,
+        name: "dddddddddd"
+    },
+    {
+        uid: 1,
+        name: "fffffffff"
+    },
+    {
+        uid: 3,
+        name: "cccccccc"
+    },
+    {
+        uid: 4,
+        name: "nnnnnnnnnn"
+    },
+    {
+        uid: 6,
+        name: "jjjjjjjjjjjj"
+    },
+    {
+        uid: 4,
+        name: "99999999999"
+    }
+];
 
-// const result = ObjectDeduplication<Item>(arr, "uid");
-
-// console.log(result);
+console.log(ObjectDeduplication<Item>(arr, "uid"));

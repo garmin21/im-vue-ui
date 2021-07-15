@@ -243,6 +243,7 @@ export default class JmUpload extends Vue {
 
 <style lang="less" scoped>
 @import "../theme-chalk/var.less";
+
 .@{--prefixcls}__upload {
     position: relative;
     width: 100%;

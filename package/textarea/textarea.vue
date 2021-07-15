@@ -95,10 +95,11 @@ export default class JmTextArea extends Vue {
 .jm-textarea {
     background-color: #fff;
 }
+
 .jm__label {
+    display: inline-block;
     width: 80px;
     overflow: hidden;
-    display: inline-block;
     text-align: left;
     font-size: 14px;
     color: #333;
@@ -106,15 +107,17 @@ export default class JmTextArea extends Vue {
     padding-left: 25px;
     padding-top: 5px;
 }
+
 .jm__text {
     position: relative;
-    width: 100%;
     display: flex;
+    width: 100%;
     background: #fff;
     font-size: 14px;
     padding: 10px 25px;
     box-sizing: border-box;
 }
+
 .jm__textarea__core {
     min-height: 100px;
     outline: 0;
@@ -133,11 +136,13 @@ export default class JmTextArea extends Vue {
     &::placeholder {
         color: #999;
     }
+
     &:disabled {
         cursor: not-allowed;
         color: #ccc;
     }
 }
+
 .jm-text__limit {
     position: absolute;
     right: 15px;
@@ -145,9 +150,11 @@ export default class JmTextArea extends Vue {
     font-size: 14px;
     color: grey;
 }
+
 .jm-disabled {
     cursor: not-allowed;
     color: #ccc;
+
     .jm__label {
         color: #ccc;
     }

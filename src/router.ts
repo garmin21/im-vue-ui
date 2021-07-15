@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
     {
         path: "/",
-        name: "Home",
+        name: "app",
         component: () =>
             import(/** app **/ "./App.vue").then((m) => {
                 console.log(m, "---------");
@@ -14,7 +14,7 @@ const routes: Array<RouteConfig> = [
             }),
         children: [
             {
-                path: "upload",
+                path: "/upload",
                 name: "upload",
                 component: () =>
                     import(/* upload */ "../example/example-upload.vue").then(
@@ -22,7 +22,7 @@ const routes: Array<RouteConfig> = [
                     )
             },
             {
-                path: "image",
+                path: "/image",
                 name: "image",
                 component: () =>
                     import(/* image */ "../example/example-image.vue").then(
@@ -30,7 +30,7 @@ const routes: Array<RouteConfig> = [
                     )
             },
             {
-                path: "switch",
+                path: "/switch",
                 name: "switch",
                 component: () =>
                     import(/* switch */ "../example/example-switch.vue").then(

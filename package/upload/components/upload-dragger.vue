@@ -62,13 +62,14 @@ export default class UploadDragger extends Vue {
 
 .@{--prefixcls}__upload--dragger {
     --text-color: #333;
+    --border-color: #f5f6f7;
 
     display: flex;
     width: 100%;
     height: 100%;
     align-items: center;
     justify-content: center;
-    border: 1px dotted #f5f6f7;
+    border: 1px dotted var(--border-color);
 }
 
 .@{--prefixcls}__tips--module {
