@@ -1,15 +1,25 @@
 <template>
-    <transition name="slide">
-        <label :class="classes" v-show="visible">
-            <slot name="icon-left"></slot>
-            <div :class="[`${this.prefixcls}__block__content`]">
-                <slot>{{ message }}</slot>
-            </div>
-            <slot name="icon-right">
+    <transition name="slide" @after-leave="handleAfterLeave">
+        <label :class="classes" :style="customStyle" v-show="visible">
+            <slot name="icon-left">
                 <img
-                    src="./icon/delete.svg"
+                    v-if="icon"
+                    :class="[`${prefixcls}__image--type`]"
                     width="20"
                     height="20"
+                    :src="icon"
+                    :alt="type"
+                />
+            </slot>
+            <div :class="[`${prefixcls}__block__content`]">
+                <slot>{{ message }}</slot>
+            </div>
+            <slot name="icon-right" v-if="showClose">
+                <img
+                    src="./icon/delete.svg"
+                    width="16"
+                    height="16"
+                    :class="[`${prefixcls}__image--delete`]"
                     alt="delete"
                     @click="handleClickDelete"
                 />
@@ -20,42 +30,37 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import { MessageOptions, MessageType } from "./props";
 import { PREFIXCLS } from "../theme-chalk/var";
 
 @Component<JmMessage>({})
-export default class JmMessage extends Vue {
-    /**
-     * 渲染类型
-     */
+export default class JmMessage extends Vue implements MessageOptions {
     @Prop({ type: String, default: "none" })
-    public type!: "success" | "info" | "warning" | "error" | "none";
+    public type!: MessageType;
 
-    /**
-     * 渲染内容
-     */
-    @Prop({ type: String, default: "" })
+    @Prop({ type: String, default: "No.Data" })
     public message!: string;
 
-    /**
-     * 控制是否显示
-     */
-    // @Prop({ type: Boolean, default: false })
-    // public visible!: boolean;
+    @Prop({ type: Boolean, default: false })
+    public showClose!: boolean;
 
-    public visible = false;
-
-    /**
-     * 渲染时间
-     */
     @Prop({ type: Number, default: 3000 })
     public duration!: number;
 
-    /**
-     * 关闭回调
-     */
+    @Prop({
+        type: Object,
+        default: () => {
+            return {
+                top: "20px"
+            };
+        }
+    })
+    public customStyle!: Partial<CSSStyleDeclaration>;
+
     @Prop({ type: Function, default: () => {} })
     public onClose!: () => void;
 
+    public visible = false;
     public prefixcls = PREFIXCLS;
     public timeId: null | NodeJS.Timeout = null;
 
@@ -66,30 +71,47 @@ export default class JmMessage extends Vue {
         ];
     }
 
+    public get icon() {
+        switch (this.type) {
+            case "success":
+                return require("./icon/success.svg");
+            case "info":
+                return require("./icon/info.svg");
+            case "warning":
+                return require("./icon/warning.svg");
+            case "error":
+                return require("./icon/error.svg");
+        }
+        return "";
+    }
+
     public handleClickDelete() {
-        // this.destroy();
+        this.destroy();
+        this.onClose();
+    }
+
+    public handleAfterLeave() {
+        this.destroy();
     }
 
     public destroy() {
-        this.$destroy();
-        this.$el.remove();
-    }
-
-    public close() {
         this.visible = false;
-        setTimeout(() => {
-            this.destroy();
+        const timeId = setTimeout(() => {
+            this.$destroy();
+            this.$el.remove();
+            clearTimeout(timeId);
         }, 500);
     }
 
     public mounted() {
-        this.timeId = setTimeout(() => {
-            this.close();
-        }, this.duration);
-    }
-
-    public beforeDestroy() {
-        this.timeId && clearTimeout(this.timeId);
+        if (!this.showClose) {
+            this.timeId = setTimeout(() => {
+                this.destroy();
+            }, this.duration);
+            this.$once("hook:beforeDestroy", () => {
+                this.timeId && clearTimeout(this.timeId);
+            });
+        }
     }
 }
 </script>
@@ -100,7 +122,7 @@ export default class JmMessage extends Vue {
 .@{--prefixcls}__message__block {
     position: fixed;
     top: 20px;
-    left: 50%;
+    right: 20px;
     display: flex;
     align-items: center;
     border-radius: 4px;
@@ -110,7 +132,6 @@ export default class JmMessage extends Vue {
     /* stylelint-disable */
     box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
         0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
-    transform: translateX(-50%);
 }
 
 .@{--prefixcls}__block__content {
@@ -119,19 +140,22 @@ export default class JmMessage extends Vue {
 
 .@{--prefixcls}__block--success {
     color: @--color-success;
-    background-color: @--bg-success;
+    background-color: mix(@--color-global, @--color-success, 90%);
 }
 
 .@{--prefixcls}__block--info {
     color: @--color-info;
+    background-color: mix(@--color-global, @--color-info, 90%);
 }
 
 .@{--prefixcls}__block--warning {
     color: @--color-warning;
+    background-color: mix(@--color-global, @--color-warning, 90%);
 }
 
 .@{--prefixcls}__block--error {
     color: @--color-error;
+    background-color: mix(@--color-global, @--color-error, 90%);
 }
 
 .slide-enter-active,
@@ -143,5 +167,14 @@ export default class JmMessage extends Vue {
 .slide-leave-to {
     top: 0;
     opacity: 0;
+}
+
+.@{--prefixcls}__image--delete {
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.@{--prefixcls}__image--type {
+    padding-right: 10px;
 }
 </style>

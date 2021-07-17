@@ -95,15 +95,15 @@ export default class JmButton extends Vue {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    outline: none;
     border: none;
     height: 38px;
-    line-height: 38px;
-    color: @--theme-white;
-    cursor: pointer;
     font-size: 14px;
-    box-sizing: border-box;
+    color: @--theme-white;
+    outline: none;
     transition: opacity 0.2s;
+    line-height: 38px;
+    cursor: pointer;
+    box-sizing: border-box;
     -webkit-appearance: none;
     user-select: none;
     touch-action: manipulation;
@@ -143,10 +143,10 @@ export default class JmButton extends Vue {
 }
 
 .jm-button-small {
-    height: 28px;
-    line-height: 26px;
     padding: 0 12px;
+    height: 28px;
     font-size: 12px;
+    line-height: 26px;
 }
 
 .jm-button-large {
@@ -159,33 +159,33 @@ export default class JmButton extends Vue {
     background-color: @--theme-white;
 
     &.jm-button-primary {
-        color: @button-bk-primary;
         border-color: @button-bk-primary;
+        color: @button-bk-primary;
     }
 
     &.jm-button-info {
-        color: @button-bk-info;
         border-color: @button-bk-info;
+        color: @button-bk-info;
     }
 
     &.jm-button-default {
-        color: @button-bk-default;
         border-color: @button-bk-default;
+        color: @button-bk-default;
     }
 
     &.jm-button-error {
-        color: @button-bk-error;
         border-color: @button-bk-error;
+        color: @button-bk-error;
     }
 
     &.jm-button-warning {
-        color: @button-bk-warning;
         border-color: @button-bk-warning;
+        color: @button-bk-warning;
     }
 
     &.jm-button-success {
-        color: @button-bk-success;
         border-color: @button-bk-success;
+        color: @button-bk-success;
     }
 }
 
@@ -212,8 +212,8 @@ export default class JmButton extends Vue {
 
 .jm-button-label {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
 @keyframes __jm-button-loading-keyframes {

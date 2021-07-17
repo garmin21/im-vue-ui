@@ -1,20 +1,28 @@
 import Vue from "vue";
 import JmMessage from "./message.vue";
+import { MessageOptions } from "./props";
+
 const MessageConstructor = Vue.extend(JmMessage);
+
 let seed = 1;
 
-const Message = function (message: string) {
+const Message = function (options: Partial<MessageOptions>) {
+    options = options || {};
+
+    if (typeof options === "string") {
+        options = {
+            message: options
+        };
+    }
     const MessageInstance = new MessageConstructor({
-        propsData: {
-            message
-        }
+        propsData: options
     });
+
     let id = `message-${seed}`;
 
     Object.defineProperty(MessageInstance, "id", {
         value: id
     });
-    console.log(MessageInstance, "ppppppppp");
     const vm = MessageInstance.$mount();
     const el = vm.$el;
     vm["visible"] = true;
