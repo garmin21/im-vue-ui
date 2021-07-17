@@ -16,7 +16,7 @@
 <script lang="ts">
 import JmCollapse from "../collapse";
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { getParentGroup } from "../../src/utils/group";
+import { getParentGroup } from "../../tool/group";
 @Component({})
 export default class JmCollapseItem extends Vue {
     @Prop({ type: String, default: "" })
@@ -93,14 +93,16 @@ export default class JmCollapseItem extends Vue {
     background-color: #fff;
     border-bottom: 1px solid #f5f6f7;
     cursor: pointer;
+
     &.jm-collapse-disabled {
         cursor: not-allowed;
         opacity: 0.3;
     }
 }
+
 .jm__label {
-    height: 49px;
     display: flex;
+    height: 49px;
     align-items: center;
     justify-content: space-between;
     font-size: 13px;
@@ -115,10 +117,12 @@ export default class JmCollapseItem extends Vue {
     line-height: 1.5;
     background-color: #fff;
 }
+
 .jm__label__icon {
     display: inline-flex;
     align-items: center;
 }
+
 .sub-title {
     font-size: 14px;
 }

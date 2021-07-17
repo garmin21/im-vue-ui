@@ -9,7 +9,7 @@ const routes: Array<RouteConfig> = [
         name: "app",
         component: () =>
             import(/** app **/ "./App.vue").then((m) => {
-                console.log(m, "---------");
+                console.log(m, "打印模块信息");
                 return m.default;
             }),
         children: [
@@ -34,6 +34,14 @@ const routes: Array<RouteConfig> = [
                 name: "switch",
                 component: () =>
                     import(/* switch */ "../example/example-switch.vue").then(
+                        (m) => m.default
+                    )
+            },
+            {
+                path: "/message",
+                name: "message",
+                component: () =>
+                    import(/* message */ "../example/example-message.vue").then(
                         (m) => m.default
                     )
             }

@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
-import { getParentGroup } from "../../src/utils/group";
+import { getParentGroup } from "../../tool/group";
 import JmRadioGroup from "./group.vue";
 import { RadioValue, RadioItem } from "./index";
 
@@ -69,16 +69,19 @@ export default class JmRadio extends Vue {
 
 <style lang="less" scoped>
 @import "../theme-chalk/config.less";
+
 .jm-radio {
     display: inline-flex;
     cursor: pointer;
 }
+
 .jm-radio__input {
     display: flex;
     align-items: center;
     font-size: 14px;
     color: #333;
 }
+
 .jm-radio__inner {
     width: 18px;
     height: 18px;
@@ -87,6 +90,7 @@ export default class JmRadio extends Vue {
     border: 1px solid #ccc;
     background-color: #fff;
 }
+
 .jm-radio__label {
     margin-left: 5px;
 }
@@ -96,6 +100,7 @@ export default class JmRadio extends Vue {
         border: 5px solid @--theme-color;
     }
 }
+
 .Jm-disabled {
     color: #c0c4cc;
     opacity: 0.6;

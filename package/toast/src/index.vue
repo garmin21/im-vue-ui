@@ -98,31 +98,31 @@ export default class Toast extends Vue implements ToastProps {
     left: 50%;
     z-index: 999;
     display: table;
-    box-sizing: border-box;
-    max-width: 90%;
-    padding: 12px 20px;
-    white-space: normal;
-    text-align: center;
-    background: #fff;
     border: 1px solid rgba(230, 230, 230, 1);
     border-radius: 6px;
+    padding: 12px 20px;
+    max-width: 90%;
+    text-align: center;
+    white-space: normal;
+    background: #fff;
     box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.15);
-    transform: translateX(-50%);
     transition: all 0.3s;
+    box-sizing: border-box;
+    transform: translateX(-50%);
 
     .fm-v3-toast-message {
         display: table-cell;
         max-width: 280px;
-        color: #333;
         font-size: 14px;
+        color: #333;
         line-height: 24px;
         vertical-align: middle;
         word-break: break-word;
     }
 
     .fm-v3-toast-icon {
-        flex-shrink: 0;
         padding-right: 5px;
+        flex-shrink: 0;
         vertical-align: middle;
     }
 }

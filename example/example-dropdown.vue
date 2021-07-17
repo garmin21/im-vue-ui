@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section v-clickoutside="close">
+        <section>
             <h1>element dropdown</h1>
             <!-- <Dropdown>
                 <span class="el-dropdown-link">
@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import Clickoutside from "../src/utils/clickoutside";
+// import Clickoutside from "../src/utils/clickoutside";
 // import Clickoutside from "element-ui/src/utils/clickoutside.js";
 // import { Dropdown, DropdownMenu, DropdownItem } from "element-ui";
 // import "element-ui/lib/theme-chalk/dropdown.css";
@@ -35,18 +35,14 @@ import Clickoutside from "../src/utils/clickoutside";
         // Dropdown,
         // DropdownMenu,
         // DropdownItem
-    },
-    directives: {
-        Clickoutside
     }
+    // directives: {
+    //     Clickoutside
+    // }
 })
 export default class ExampleDropdown extends Vue {
     public close() {
         console.log("点击元素外边的事件被触发了");
-    }
-
-    public mounted() {
-        // console.log(this.$isServer, "kkkkkkkkkkkk");
     }
 }
 </script>

@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { getParentGroup } from "../../src/utils/group";
+import { getParentGroup } from "../../tool/group";
 import JmCheckBoxGroup from "./checkbox-group.vue";
 import { CheckBoxValue, CheckBoxLabel, CheckboxResult } from "./index";
 
@@ -79,48 +79,6 @@ export default class JmCheckBox extends Vue {
 
 <style lang="less" scoped>
 @import "../theme-chalk/config.less";
-.jm-checkbox {
-    display: inline-flex;
-    font-size: 14px;
-    color: #333;
-    cursor: pointer;
-
-    &.checked {
-        .jm-checkout__inner {
-            background: @--theme-color url("./icons/check.svg") center center
-                no-repeat;
-            border: none;
-        }
-    }
-    &.indeterminate {
-        .jm-checkout__inner {
-            background: @--theme-color url("./icons/half-check.svg") center
-                center no-repeat;
-            border: none;
-        }
-    }
-    &.disabled {
-        color: #c0c4cc;
-        opacity: 0.6;
-        cursor: not-allowed;
-        .jm-checkout__inner {
-            background-color: #c0c4cc;
-        }
-    }
-}
-.jm-checkbox-img {
-    -webkit-tap-highlight-color: transparent;
-    -moz-user-select: none; /*火狐*/
-    -webkit-user-select: none; /*webkit浏览器*/
-    -ms-user-select: none; /*IE10*/
-    -khtml-user-select: none; /*早期浏览器*/
-    user-select: none;
-}
-
-.jm-checkbox__input {
-    display: flex;
-    align-items: center;
-}
 
 .jm-checkout__inner {
     display: flex;
@@ -132,6 +90,55 @@ export default class JmCheckBox extends Vue {
     border-radius: 50%;
     border: 1px solid #ccc;
     background-color: #fff;
+}
+
+.jm-checkbox {
+    display: inline-flex;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+
+    &.checked {
+        .jm-checkout__inner {
+            background: @--theme-color url("./icons/check.svg");
+            background-repeat: repeat;
+            background-position: center center;
+            border: none;
+        }
+    }
+
+    &.indeterminate {
+        .jm-checkout__inner {
+            border: none;
+            background: @--theme-color url("./icons/half-check.svg");
+            background-repeat: repeat;
+            background-position: center center;
+        }
+    }
+
+    &.disabled {
+        color: #c0c4cc;
+        opacity: 0.6;
+        cursor: not-allowed;
+
+        .jm-checkout__inner {
+            background-color: #c0c4cc;
+        }
+    }
+}
+
+.jm-checkbox-img {
+    -webkit-tap-highlight-color: transparent;
+    -moz-user-select: none; /* 火狐 */
+    -webkit-user-select: none; /* webkit浏览器 */
+    -ms-user-select: none; /* IE10 */
+    -khtml-user-select: none; /* 早期浏览器 */
+    user-select: none;
+}
+
+.jm-checkbox__input {
+    display: flex;
+    align-items: center;
 }
 
 .jm-checkout__label {
