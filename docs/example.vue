@@ -36,7 +36,7 @@ export default class Example extends Vue {
                 result =
                     item.children?.map((item) => ({
                         name: item.name + "",
-                        path: item.path + ""
+                        path: `/example/${item.path}`
                     })) || [];
             }
         });

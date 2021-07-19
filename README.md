@@ -1,5 +1,13 @@
 # vue-ui
 
+<div style=" display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;">
+    <img src="./src/assets/logo.png"  />
+</div>
+
 vue2.0 class 写法的 vue 组件库
 
 ### BEM css 规范

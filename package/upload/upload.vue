@@ -105,10 +105,7 @@ export default class JmUpload extends Vue {
      */
     @Prop({
         type: String,
-        required: true,
-        validator: (value: string) => {
-            return !value;
-        }
+        required: true
     })
     public action!: string;
 

@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
 Vue.use(VueRouter);
-export { RouteConfig };
+
 export const routes: Array<RouteConfig> = [
     {
         path: "/",
@@ -50,13 +50,28 @@ export const routes: Array<RouteConfig> = [
                     import(/* message */ "../example/example-message.vue").then(
                         (m) => m.default
                     )
+            },
+            {
+                path: "button",
+                name: "button",
+                component: () =>
+                    import(/* button */ "../example/example-button.vue").then(
+                        (m) => m.default
+                    )
+            },
+            {
+                path: "input-number",
+                name: "input-number",
+                component: () =>
+                    import(
+                        /* input-number */ "../example/example-input-number.vue"
+                    ).then((m) => m.default)
             }
         ]
     }
 ];
 
 const router = new VueRouter({
-    mode: "history",
     routes
 });
 
