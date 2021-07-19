@@ -2,21 +2,22 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
 Vue.use(VueRouter);
-
-const routes: Array<RouteConfig> = [
+export { RouteConfig };
+export const routes: Array<RouteConfig> = [
     {
         path: "/",
         name: "main",
-        component: () => import(/*main*/ "./main.vue").then((m) => m.default)
+        component: () =>
+            import(/*main*/ "./main.vue").then((m) => {
+                console.log(m, "---> 模块信息 <---");
+                return m.default;
+            })
     },
     {
-        path: "/app",
-        name: "app",
+        path: "/example",
+        name: "example",
         component: () =>
-            import(/** app **/ "./App.vue").then((m) => {
-                console.log(m, "打印模块信息");
-                return m.default;
-            }),
+            import(/* example */ "./example.vue").then((m) => m.default),
         children: [
             {
                 path: "upload",

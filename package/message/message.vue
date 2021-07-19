@@ -30,13 +30,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { MessageOptions, MessageType } from "./props";
+import { MessageOptions } from "./props";
 import { PREFIXCLS } from "../theme-chalk/var";
 
 @Component<JmMessage>({})
 export default class JmMessage extends Vue implements MessageOptions {
     @Prop({ type: String, default: "none" })
-    public type!: MessageType;
+    public type!: "success" | "info" | "warning" | "error" | "none";
 
     @Prop({ type: String, default: "No.Data" })
     public message!: string;

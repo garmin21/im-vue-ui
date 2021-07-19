@@ -82,14 +82,14 @@ export default class JmCheckBox extends Vue {
 
 .jm-checkout__inner {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 50%;
     width: 18px;
     height: 18px;
-    box-sizing: border-box;
-    border-radius: 50%;
-    border: 1px solid #ccc;
     background-color: #fff;
+    box-sizing: border-box;
 }
 
 .jm-checkbox {
@@ -100,10 +100,10 @@ export default class JmCheckBox extends Vue {
 
     &.checked {
         .jm-checkout__inner {
-            background: @--theme-color url("./icons/check.svg");
-            background-repeat: repeat;
-            background-position: center center;
             border: none;
+            background: @--theme-color url("./icons/check.svg");
+            background-position: center center;
+            background-repeat: repeat;
         }
     }
 
@@ -111,8 +111,8 @@ export default class JmCheckBox extends Vue {
         .jm-checkout__inner {
             border: none;
             background: @--theme-color url("./icons/half-check.svg");
-            background-repeat: repeat;
             background-position: center center;
+            background-repeat: repeat;
         }
     }
 

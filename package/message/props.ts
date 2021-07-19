@@ -1,10 +1,8 @@
-export type MessageType = "success" | "info" | "warning" | "error" | "none";
-
-export interface MessageOptions {
+interface MessageOptions {
     /**
      * 渲染类型
      */
-    type: MessageType;
+    type: "success" | "info" | "warning" | "error" | "none";
 
     /**
      * 渲染内容
@@ -36,3 +34,5 @@ export interface MessageOptions {
      */
     visible: boolean;
 }
+
+export { MessageOptions };

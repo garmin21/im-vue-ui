@@ -1,5 +1,5 @@
 <template>
-    <JmButton @click="$router.push('/app/message')" class="fixed">
+    <JmButton @click="$router.push('/example')" class="fixed">
         快速开始
     </JmButton>
 </template>
