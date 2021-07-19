@@ -122,16 +122,19 @@ export default class JmMessage extends Vue implements MessageOptions {
 .@{--prefixcls}__message__block {
     position: fixed;
     top: 20px;
-    right: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     border-radius: 4px;
     padding: 15px 15px 15px 20px;
     min-width: 380px;
     background-color: @--color-global;
+    transition: opacity 0.3s, transform 0.4s, top 0.4s;
     /* stylelint-disable */
     box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
         0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
 }
 
 .@{--prefixcls}__block__content {
@@ -158,15 +161,10 @@ export default class JmMessage extends Vue implements MessageOptions {
     background-color: mix(@--color-global, @--color-error, 90%);
 }
 
-.slide-enter-active,
-.slide-leave-active {
-    transition: all 0.3s;
-    transition-property: opacity, top;
-}
 .slide-enter,
-.slide-leave-to {
-    top: 0;
+.slide-leave-active {
     opacity: 0;
+    transform: translate(-50%, -100%);
 }
 
 .@{--prefixcls}__image--delete {

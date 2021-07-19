@@ -32,6 +32,7 @@ export default class IconInfo extends Vue {}
 </script>
 <style lang="less" scoped>
 @import "../../../theme-chalk/toast.less";
+
 .fm-v3-dialog-icon-info {
     fill: @icon-color-info;
 }

@@ -16,6 +16,7 @@ export const routes: Array<RouteConfig> = [
     {
         path: "/example",
         name: "example",
+        redirect: "/example/upload",
         component: () =>
             import(/* example */ "./example.vue").then((m) => m.default),
         children: [
@@ -66,6 +67,46 @@ export const routes: Array<RouteConfig> = [
                     import(
                         /* input-number */ "../example/example-input-number.vue"
                     ).then((m) => m.default)
+            },
+            {
+                path: "checkbox",
+                name: "checkbox",
+                component: () =>
+                    import(
+                        /* checkbox */ "../example/example-checkbox.vue"
+                    ).then((m) => m.default)
+            },
+            {
+                path: "collapse",
+                name: "collapse",
+                component: () =>
+                    import(
+                        /* collapse */ "../example/example-collapse.vue"
+                    ).then((m) => m.default)
+            },
+            {
+                path: "progress",
+                name: "progress",
+                component: () =>
+                    import(
+                        /* progress */ "../example/example-progress.vue"
+                    ).then((m) => m.default)
+            },
+            {
+                path: "tree",
+                name: "tree",
+                component: () =>
+                    import(/* tree */ "../example/example-tree.vue").then(
+                        (m) => m.default
+                    )
+            },
+            {
+                path: "toast",
+                name: "toast",
+                component: () =>
+                    import(/* toast */ "../example/example-toast.vue").then(
+                        (m) => m.default
+                    )
             }
         ]
     }

@@ -70,10 +70,12 @@ export default class IconLoading extends Vue {}
     transform-origin: center;
     animation: __jm-loading-keyframes 0.5s infinite linear;
 }
+
 @keyframes __jm-loading-keyframes {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }

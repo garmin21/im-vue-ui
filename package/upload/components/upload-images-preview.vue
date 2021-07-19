@@ -82,7 +82,7 @@ export default class UploadImagesPreview extends Vue {
 
     display: block;
     width: 100%;
-    height: 40px;
+    height: 100%;
 }
 
 .@{--prefixcls}__images__map {

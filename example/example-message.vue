@@ -47,19 +47,13 @@ export default class ExampleMessage extends Vue {
     public showMessage2() {
         Message({
             type: "info",
-            message: "onClic as Message",
-            customStyle: {
-                top: "40px"
-            }
+            message: "onClic as Message"
         });
     }
     public showMessage3() {
         Message({
             type: "warning",
-            message: "onClic as Message",
-            customStyle: {
-                top: "50%"
-            }
+            message: "onClic as Message"
         });
     }
     public showMessage4() {
@@ -67,10 +61,6 @@ export default class ExampleMessage extends Vue {
             type: "error",
             message: "onClic as Message",
             showClose: true,
-            customStyle: {
-                left: "50%",
-                top: "50%"
-            },
             onClose: () => {
                 console.log("我关闭了 !!!!");
             }
