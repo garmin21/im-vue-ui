@@ -1,14 +1,10 @@
 # vue-ui
 
-<div style=" display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;">
-    <img src="./src/assets/logo.png"  />
-</div>
+[logo.png](https://postimg.cc/G9rG0p1b)
 
 vue2.0 class 写法的 vue 组件库
+
+> 预览地址: https://garmin21.github.io/im-vue-ui/#/
 
 ### BEM css 规范
 
