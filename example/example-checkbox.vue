@@ -18,7 +18,7 @@
                 <JmCheckBox :label="3" />
             </JmCheckBoxGroup>
         </p>
-        <p>
+        <div>
             <h5>indeterminate</h5>
             <label>
                 <JmCheckBox 
@@ -35,7 +35,7 @@
                 <JmCheckBox :label="2" />
                 <JmCheckBox :label="3" />
             </JmCheckBoxGroup>
-        </p>
+        </div>
     </section>
 </template>
 
@@ -43,6 +43,9 @@
 import { Vue, Component } from "vue-property-decorator";
 import JmCheckBox, {CheckboxResult, CheckBoxValue} from "../package/checkbox";
 import JmCheckBoxGroup from "../package/checkbox-group";
+
+
+
 @Component({
     components: {
         JmCheckBox,

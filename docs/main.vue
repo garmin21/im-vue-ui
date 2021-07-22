@@ -7,6 +7,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import JmButton from "../package/button";
+
 @Component<Main>({
     components: {
         JmButton
