@@ -91,7 +91,6 @@ export default class JmButton extends Vue {
 @import "../theme-chalk/button.less";
 
 .jm-button {
-    position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
