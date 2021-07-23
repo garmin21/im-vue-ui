@@ -38,8 +38,7 @@
         </section>
         <section>
             <h3>加载状态</h3>
-            <JmButton type="primary" loading> 矩形按钮 </JmButton>
-            <JmButton type="info" loading :round="true"> 圆形按钮 </JmButton>
+            <JmButton type="primary" loading> 加载状态 </JmButton>
         </section>
         <section>
             <h3>图标按钮</h3>
@@ -48,14 +47,6 @@
                     src="../src/assets/logo.png"
                     width="20"
                     height="20">
-                <span>图标按钮</span>
-            </JmButton>
-            <JmButton type="info">
-                <img
-                    src="../src/assets/logo.png"
-                    width="20"
-                    height="20"
-                />
                 <span>图标按钮</span>
             </JmButton>
         </section>

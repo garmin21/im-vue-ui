@@ -6,18 +6,19 @@
 
 <script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
-import { CheckBoxValue, CheckBoxLabel } from "./index";
+
+
 @Component<JmCheckBoxGroup>({})
 export default class JmCheckBoxGroup extends Vue {
     @Prop({
         type: Array,
         required: true
     })
-    public value!: CheckBoxValue;
+    public value!: string[];
 
-    public deepArray: CheckBoxValue = [];
+    public deepArray: string[] = [];
 
-    public $updateValue(checked: boolean, label: CheckBoxLabel) {
+    public $updateValue(checked: boolean, label: string) {
         if (!checked) {
             const index = this.deepArray.indexOf(label);
             index >= 0 && this.deepArray.splice(index, 1);

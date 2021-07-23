@@ -14,12 +14,16 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { getParentGroup } from "../../tool/group";
 import JmCheckBoxGroup from "./checkbox-group.vue";
-import { CheckBoxValue, CheckBoxLabel, CheckboxResult } from "./index";
+import { CheckboxResult } from "./index";
 
+
+/**
+ * 2021-7-23:去除支持多参数
+ */
 @Component<JmCheckBox>({})
 export default class JmCheckBox extends Vue {
-    @Prop({ type: [Number, String, Boolean] })
-    public label?: CheckBoxLabel;
+    @Prop({ type: String })
+    public label?: string;
 
     @Prop({ type: Boolean })
     public value?: boolean;
@@ -45,7 +49,7 @@ export default class JmCheckBox extends Vue {
         return getParentGroup<JmCheckBoxGroup>(this, "JmCheckBoxGroup");
     }
 
-    public get isArray(): CheckBoxValue {
+    public get isArray(): string[] {
         if (this.isGroup && Array.isArray(this.isGroup.value)) {
             return this.isGroup?.value;
         }
@@ -54,7 +58,7 @@ export default class JmCheckBox extends Vue {
 
     public get checked() {
         if (this.isGroup && this.isArray.length) {
-            return this.isArray.some((v: CheckBoxLabel) => v === this.label);
+            return this.isArray.some((v) => v === this.label);
         }
         return this.value;
     }
