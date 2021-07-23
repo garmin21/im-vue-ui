@@ -10,7 +10,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "deploy": "sh deploy.sh",
-    "npm": "vue-cli-service build --target lib src/main.ts",
+    "npm": "vue-cli-service build --target lib src/main.ts"
   },
   "style": "stylelint 'src/**/*.(vue|scss|css)' --fix",
   "dependencies": {
@@ -32,6 +32,7 @@
     "@vue/cli-service": "4.5.13",
     "@vue/eslint-config-prettier": "6.0.0",
     "@vue/eslint-config-typescript": "7.0.0",
+    "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.30.0",
     "eslint-plugin-prettier": "3.4.0",
