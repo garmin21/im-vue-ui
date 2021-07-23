@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import { routes } from "./router";
+import { routes } from "./routes";
 
 export interface Item {
     name: string;

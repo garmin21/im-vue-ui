@@ -5,10 +5,12 @@
     align-items: center;
     width: 100%;
     height: 100%;">
-    <img src="./src/assets/logo.png"  />
+    <img src="https://i.postimg.cc/c1tmnK9t/logo.png"  />
 </div>
 
 vue2.0 class 写法的 vue 组件库
+
+> 预览地址: https://garmin21.github.io/im-vue-ui/#/
 
 ### BEM css 规范
 
