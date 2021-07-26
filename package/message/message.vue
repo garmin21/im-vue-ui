@@ -30,13 +30,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { MessageOptions } from "./props";
+import { MessageOptions ,Type } from "./props";
 import { PREFIXCLS } from "../theme-chalk/var";
 
 @Component<JmMessage>({})
 export default class JmMessage extends Vue implements MessageOptions {
-    @Prop({ type: String, default: "none" })
-    public type!: "success" | "info" | "warning" | "error" | "none";
+    @Prop({ type: String, default: Type['none'] })
+    public type!: Type;
 
     @Prop({ type: String, default: "No.Data" })
     public message!: string;
@@ -57,12 +57,14 @@ export default class JmMessage extends Vue implements MessageOptions {
     })
     public customStyle!: Partial<CSSStyleDeclaration>;
 
+    /**
+     * 是否手动关闭
+     */
     @Prop({ type: Function, default: () => {} })
     public onClose!: () => void;
 
     public visible = false;
     public prefixcls = PREFIXCLS;
-    public timeId: null | NodeJS.Timeout = null;
 
     public get classes() {
         return [
@@ -73,13 +75,13 @@ export default class JmMessage extends Vue implements MessageOptions {
 
     public get icon() {
         switch (this.type) {
-            case "success":
+            case Type.success:
                 return require("./icon/success.svg");
-            case "info":
+            case Type.info:
                 return require("./icon/info.svg");
-            case "warning":
+            case Type.warning:
                 return require("./icon/warning.svg");
-            case "error":
+            case Type.error:
                 return require("./icon/error.svg");
         }
         return "";
@@ -105,11 +107,11 @@ export default class JmMessage extends Vue implements MessageOptions {
 
     public mounted() {
         if (!this.showClose) {
-            this.timeId = setTimeout(() => {
+            const timeId = setTimeout(() => {
                 this.destroy();
             }, this.duration);
             this.$once("hook:beforeDestroy", () => {
-                this.timeId && clearTimeout(this.timeId);
+                clearTimeout(timeId);
             });
         }
     }

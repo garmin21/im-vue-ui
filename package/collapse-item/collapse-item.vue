@@ -89,22 +89,22 @@ export default class JmCollapseItem extends Vue {
 
 <style lang="less" scoped>
 .jm-collapse-item {
+    border-bottom: 1px solid #f5f6f7;
     height: auto;
     background-color: #fff;
-    border-bottom: 1px solid #f5f6f7;
     cursor: pointer;
 
     &.jm-collapse-disabled {
-        cursor: not-allowed;
         opacity: 0.3;
+        cursor: not-allowed;
     }
 }
 
 .jm__label {
     display: flex;
-    height: 49px;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    height: 49px;
     font-size: 13px;
     font-weight: 500;
 }
@@ -112,10 +112,10 @@ export default class JmCollapseItem extends Vue {
 .jm__value {
     display: block;
     padding: 12px 26px;
-    color: #666;
     font-size: 14px;
-    line-height: 1.5;
+    color: #666;
     background-color: #fff;
+    line-height: 1.5;
 }
 
 .jm__label__icon {

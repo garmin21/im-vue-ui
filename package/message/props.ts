@@ -35,4 +35,12 @@ interface MessageOptions {
     visible: boolean;
 }
 
-export { MessageOptions };
+enum Type {
+    success = 'success',
+    info = 'info',
+    warning = 'warning',
+    error = 'error',
+    none = 'none'
+}
+
+export { MessageOptions, Type };
