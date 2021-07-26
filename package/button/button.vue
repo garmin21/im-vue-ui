@@ -8,12 +8,12 @@
         <img
             src="./icons/loading.svg"
             v-if="loading"
-            class="jm-button-loading"
+            :class="[`${prefixcls}__button--loading`]"
             width="20"
             height="20"
             alt="loading"
         />
-        <div class="jm-button-label">
+        <div :class="[`${prefixcls}__button--label`]">
             <slot />
         </div>
     </button>
@@ -22,8 +22,9 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { Type, Size } from "./index";
+import { PREFIXCLS } from '../theme-chalk/var'
 
-@Component({})
+@Component<JmButton>({})
 export default class JmButton extends Vue {
     // 类型
     @Prop({
@@ -65,15 +66,20 @@ export default class JmButton extends Vue {
     @Prop({ type: Object })
     public componentStyle?: Partial<CSSStyleDeclaration>;
 
+    public get prefixcls() {
+        return PREFIXCLS;
+    }
+
     public get classe() {
+        const { prefixcls } = this;
         return [
-            "jm-button",
-            `jm-button-${this.type}`,
-            `jm-button-${this.size}`,
+            `${prefixcls}__button`,
+            `${prefixcls}__button--${this.type}`,
+            `${prefixcls}__button--${this.size}`,
             {
-                [`jm-button-plain`]: this.plain,
-                [`jm-button-disabled`]: this.disabled,
-                [`jm-button-round`]: this.round,
+                [`${prefixcls}__button--plain`]: this.plain,
+                [`${prefixcls}__button--disabled`]: this.disabled,
+                [`${prefixcls}__button--round`]: this.round,
                 [`loading`]: this.loading
             }
         ];
@@ -87,17 +93,17 @@ export default class JmButton extends Vue {
 </script>
 
 <style lang="less" scoped>
-@import "../theme-chalk/config.less";
-@import "../theme-chalk/button.less";
 
-.jm-button {
+@import '../theme-chalk/var.less';
+
+.@{--prefixcls}__button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     border: none;
     height: 38px;
     font-size: 14px;
-    color: @--theme-white;
+    color: @--color-global;
     outline: none;
     transition: opacity 0.2s;
     line-height: 38px;
@@ -112,88 +118,54 @@ export default class JmButton extends Vue {
     }
 }
 // .jm-button >
-.jm-button-primary {
+.@{--prefixcls}__button--primary {
     background-color: @button-bk-primary;
 }
 
-.jm-button-info {
+.@{--prefixcls}__button--info {
     background-color: @button-bk-info;
 }
 
-.jm-button-default {
+.@{--prefixcls}__button--default {
     color: #ccc !important;
     background-color: @button-bk-default;
 }
 
-.jm-button-error {
+.@{--prefixcls}__button--error {
     background-color: @button-bk-error;
 }
 
-.jm-button-warning {
+.@{--prefixcls}__button--warning {
     background-color: @button-bk-warning;
 }
 
-.jm-button-success {
+.@{--prefixcls}__button--success {
     background-color: @button-bk-success;
 }
 
-.jm-button-normal {
+.@{--prefixcls}__button--normal {
     padding: 0 18px;
 }
 
-.jm-button-small {
+.@{--prefixcls}__button--small {
     padding: 0 12px;
     height: 28px;
     font-size: 12px;
     line-height: 26px;
 }
 
-.jm-button-large {
+.@{--prefixcls}__button--large {
     width: 100%;
     height: 48px;
     line-height: 46px;
 }
 
-.jm-button-plain {
-    background-color: @--theme-white;
-
-    &.jm-button-primary {
-        border-color: @button-bk-primary;
-        color: @button-bk-primary;
-    }
-
-    &.jm-button-info {
-        border-color: @button-bk-info;
-        color: @button-bk-info;
-    }
-
-    &.jm-button-default {
-        border-color: @button-bk-default;
-        color: @button-bk-default;
-    }
-
-    &.jm-button-error {
-        border-color: @button-bk-error;
-        color: @button-bk-error;
-    }
-
-    &.jm-button-warning {
-        border-color: @button-bk-warning;
-        color: @button-bk-warning;
-    }
-
-    &.jm-button-success {
-        border-color: @button-bk-success;
-        color: @button-bk-success;
-    }
-}
-
-.jm-button-disabled {
+.@{--prefixcls}__button--disabled {
     cursor: not-allowed;
     opacity: 0.68;
 }
 
-.jm-button-round {
+.@{--prefixcls}__button--round {
     border-radius: 25px;
 }
 
@@ -201,7 +173,7 @@ export default class JmButton extends Vue {
     display: inline-flex;
     align-items: center;
 
-    .jm-button-loading {
+    .@{--prefixcls}__button--loading {
         width: 20px;
         height: 20px;
         cursor: default;
@@ -209,7 +181,7 @@ export default class JmButton extends Vue {
     }
 }
 
-.jm-button-label {
+.@{--prefixcls}__button--label {
     display: flex;
     justify-content: space-between;
     align-items: center;

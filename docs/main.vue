@@ -1,7 +1,7 @@
 <template>
     <div>
         <JmButton @click="$router.push('/example')" class="fixed">
-        快速开始
+            快速开始
         </JmButton>
     </div>
 </template>

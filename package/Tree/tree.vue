@@ -18,8 +18,10 @@
                 </JmRadio>
             </template>
         </div>
-        <div v-show="isOpen" class="tree__list">
-            <template v-for="(child, index) of item.children">
+        <div v-show="isOpen" class="tree__list" v-if="item.children">
+            <template 
+                v-for="(child, index) of item.children"
+            >
                 <JmTree
                     :key="`tree-${index}`"
                     :value="value"
@@ -79,14 +81,14 @@ export default class JmTree extends Vue {
 }
 
 .tree__label {
-    color: #767676;
     font-size: 14px;
+    color: #767676;
 }
 
 .tree__icon {
+    padding: 6px;
     width: 12px;
     height: 12px;
-    padding: 6px;
 }
 
 .tree__list {
