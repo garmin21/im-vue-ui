@@ -16,8 +16,8 @@ import JmDatePicker,{ ComponentView } from "../package/date-picker";
         JmDatePicker
     }
 })
-export default class ExampleSwitch extends Vue {
-    
+export default class ExampleDatePicker extends Vue {
+
     public get days() {
         return ComponentView.DAYS;
     }

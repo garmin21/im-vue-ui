@@ -1,8 +1,10 @@
 <template>
     <div :class="classes">
-        <input type="text" v-model="dateValue" @focus="handelFocus" @blur="handelBlur"  />
+        <JmInput  v-model="dateValue" @focus="handelFocus" @blur="handelBlur"  />
         <transition name="fade">
-            <div v-if="visible">
+            <!-- v-if="visible" -->
+            <!-- 这里到时候换成 popover  -->
+            <div :class="[`${prefixcls}__picker--visible`]">
                 <component :is="isComponent"></component>
             </div>
         </transition>
@@ -15,10 +17,13 @@ import { PREFIXCLS } from "../theme-chalk/var";
 import { getYearMonthDay } from '../../tool/date';
 import { ComponentView } from './type';
 
+import JmInput from '../input';
+
 import JmPickerDays from './components/picker-days.vue'
 
 @Component<JmDatePicker>({
     components:{
+        JmInput,
         JmPickerDays
     }
 })
@@ -61,8 +66,14 @@ export default class JmDatePicker extends Vue {
         const [year, month, day] = getYearMonthDay(this.value);
         return `${year}-${month + 1}-${day}`;
     }
+    
     public set dateValue(datValue: string) {
-        console.log(datValue,'l;;;;;;')
+        const reg = /(\d+)-(\d+)-(\d+)/;
+        const matched = datValue.match(reg);
+        if (matched) {
+            const [, year, month, day] = matched.map(Number);
+            this.$emit('input', new Date(year, month+1, day));
+        }
     }
 
     public handelFocus() {
@@ -78,8 +89,14 @@ export default class JmDatePicker extends Vue {
 <style lang="less" scoped>
 @import "../theme-chalk/var.less";
 
-// .@{--prefixcls}__date__picker {
-// }
+.@{--prefixcls}__picker--visible {
+    padding: 20px;
+    height: 100%;
+    box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    border-radius: 6px;
+
+}
 
 .fade-enter-active,
 .fade-leave-active {
@@ -87,7 +104,7 @@ export default class JmDatePicker extends Vue {
 }
 
 .fade-enter,
-.fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-leave-to {
     opacity: 0;
 }
 </style>

@@ -112,6 +112,11 @@ export const routes: Array<RouteConfig> = [
                 path: 'date-picker',
                 name: 'date-picker',
                 component: () => import(/* date-picker */ '../example/example-date-picker.vue').then(m => m.default)
+            },
+            {
+                path: 'input',
+                name: 'input',
+                component:() => import(/* input */ '../example/example-input.vue').then(m => m.default)
             }
         ]
     }
