@@ -1,10 +1,6 @@
 import JmCheckBox from './checkbox.vue';
 
-export type CheckBoxValue = Array<number | string>;
-
-export type CheckBoxLabel = number | string;
-
-export interface CheckboxResult{
+export interface CheckboxResult {
     label:string;
     checked:boolean;
 }

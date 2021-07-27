@@ -1,23 +1,30 @@
 <template>
-    <div class="jm-checkbox-group">
+    <div :class="[`${prefixcls}__checkbox__group`]">
         <slot></slot>
     </div>
 </template>
 
 <script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
-import { CheckBoxValue, CheckBoxLabel } from "./index";
+import { PREFIXCLS } from '../theme-chalk/var'
+
 @Component<JmCheckBoxGroup>({})
 export default class JmCheckBoxGroup extends Vue {
     @Prop({
         type: Array,
         required: true
     })
-    public value!: CheckBoxValue;
+    public value!: string[];
 
-    public deepArray: CheckBoxValue = [];
+    public deepArray: string[] = [];
 
-    public $updateValue(checked: boolean, label: CheckBoxLabel) {
+
+    public get prefixcls() {
+        return PREFIXCLS;
+    }
+
+    // 解法1 ，定义变量
+    public $updateValue(checked: boolean, label: string) {
         if (!checked) {
             const index = this.deepArray.indexOf(label);
             index >= 0 && this.deepArray.splice(index, 1);
@@ -26,6 +33,19 @@ export default class JmCheckBoxGroup extends Vue {
         }
         this.$emit("input", this.deepArray);
         this.$emit("change", this.deepArray);
+    }
+
+    // 解法二
+    public $updateValue1(checked: boolean, label: string) {
+        const createarr = this.value.slice(0);
+        if(!checked) {
+            const index = createarr.indexOf(label);
+            index >= 0 && createarr.splice(index, 1);
+        } else {
+            createarr.push(label);
+        }
+        this.$emit('input', createarr);
+        this.$emit('change', createarr)
     }
 
     public created() {

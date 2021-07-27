@@ -39,26 +39,28 @@ export default class JmDrawer extends Vue {
 <style lang="less" scoped>
 @import "../theme-chalk/config.less";
 .@{--prefixcls}-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
 }
+
 .mark {
     position: fixed;
-    z-index: 3;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
+    left: 0;
+    z-index: 3;
     background: rgba(0, 0, 0, 0.8);
 }
+
 .container-left {
     position: fixed;
-    z-index: 4;
     top: 0;
     left: 0;
+    z-index: 4;
     width: calc(100% - 60%);
     height: 100%;
     background-color: white;
@@ -66,9 +68,9 @@ export default class JmDrawer extends Vue {
 
 .container-bottom {
     position: fixed;
-    z-index: 4;
-    bottom: 0;
     right: 0;
+    bottom: 0;
+    z-index: 4;
     width: 100%;
     height: calc(100% - 60%);
     background-color: white;
@@ -76,9 +78,9 @@ export default class JmDrawer extends Vue {
 
 .container-right {
     position: fixed;
-    z-index: 4;
     right: 0;
     bottom: 0;
+    z-index: 4;
     width: calc(100% - 60%);
     height: 100%;
     background-color: white;
@@ -86,9 +88,9 @@ export default class JmDrawer extends Vue {
 
 .container-top {
     position: fixed;
-    z-index: 4;
     top: 0;
     left: 0;
+    z-index: 4;
     width: 100%;
     height: calc(100% - 60%);
     background-color: white;

@@ -76,8 +76,8 @@ export default class ImageViewer extends Vue {
     left: 0;
     z-index: 1;
     margin: auto;
-    opacity: 0.5;
     background: var(--bg-mask-color);
+    opacity: 0.5;
 }
 
 .@{--prefixcls}__viewer__close {
@@ -86,12 +86,12 @@ export default class ImageViewer extends Vue {
     right: 25px;
     z-index: 2;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
     width: 40px;
     height: 40px;
     background: var(--bg-close-color);
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
 }
 
@@ -99,17 +99,17 @@ export default class ImageViewer extends Vue {
     position: absolute;
     z-index: 1;
     display: flex;
-    width: 100%;
-    height: 100%;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .@{--prefixcls}__canvas__image {
-    transform: scale(0.8) rotate(0deg);
-    margin-left: 0;
     margin-top: 0;
-    max-height: 100%;
+    margin-left: 0;
     max-width: 100%;
+    max-height: 100%;
+    transform: scale(0.8) rotate(0deg);
 }
 </style>

@@ -109,49 +109,55 @@ export default class JmInputNumber extends Vue {
 </script>
 <style lang="less" scoped>
 @import "../theme-chalk/config.less";
+
 .fm-counter-input {
+    border-radius: 7px;
     background-color: @--theme-white;
     box-shadow: 0 1px 7px 0 #edeef1;
-    border-radius: 7px;
 }
+
 .fm-label {
     padding: 0 10px;
     padding-top: 6px;
-    color: #767676;
     font-size: 12px;
+    color: #767676;
 }
+
 .fm-counter-inner {
     display: flex;
     align-items: center;
-    box-sizing: border-box;
-    height: 46px;
-    padding: 8px;
-    color: #333;
-    font-size: 18px;
     border-bottom: 2px solid @--theme-white;
+    padding: 8px;
+    height: 46px;
+    font-size: 18px;
+    color: #333;
+    box-sizing: border-box;
 }
+
 .input-number {
-    flex: 1;
+    border: none;
     text-align: center;
     background-color: @--theme-white;
-    border: none;
     outline: none;
+    flex: 1;
 }
 
 .btn {
     display: block;
     width: 40px;
     height: auto;
-    color: #767676;
     font-size: 24px;
     text-align: center;
+    color: #767676;
     background: #f5f6f7;
     cursor: pointer;
     user-select: none;
 }
+
 .active {
     border-bottom-color: @--theme-color;
 }
+
 .allowed {
     cursor: not-allowed;
 }
@@ -159,6 +165,7 @@ export default class JmInputNumber extends Vue {
 .input-number::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
+
 .input-number::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }

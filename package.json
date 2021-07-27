@@ -10,16 +10,19 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "deploy": "sh deploy.sh",
-    "npm": "vue-cli-service build --target lib src/main.ts"
+    "npm": "vue-cli-service build --target lib src/main.ts",
+    "type-check": "tsc --noEmit && vtc --workspace=. --srcDir=./package"
   },
   "style": "stylelint 'src/**/*.(vue|scss|css)' --fix",
   "dependencies": {
     "@popperjs/core": "^2.9.2",
+    "@types/node": "^16.4.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
-    "vue-router": "^3.0.0"
+    "vue-router": "^3.0.0",
+    "vue-type-check": "^1.1.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "4.28.2",
@@ -31,6 +34,8 @@
     "@vue/cli-service": "4.5.13",
     "@vue/eslint-config-prettier": "6.0.0",
     "@vue/eslint-config-typescript": "7.0.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "7.30.0",
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-vue": "7.13.0",
@@ -47,5 +52,10 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
