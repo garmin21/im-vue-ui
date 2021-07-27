@@ -1,48 +1,51 @@
 <template>
     <div :class="classes">
-        <JmInput  v-model="dateValue" @focus="handelFocus" @blur="handelBlur"  />
+        {{ dateValue }}
+        <JmInput v-model="dateValue" @focus="handelFocus" @blur="handelBlur" />
         <transition name="fade">
             <!-- v-if="visible" -->
             <!-- 这里到时候换成 popover  -->
             <div :class="[`${prefixcls}__picker--visible`]">
-                <component :is="isComponent"></component>
+                <component :is="isComponent" :dateValue="dateValue" />
             </div>
         </transition>
     </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component,Prop } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import { PREFIXCLS } from "../theme-chalk/var";
-import { getYearMonthDay } from '../../tool/date';
-import { ComponentView } from './type';
+import { getYearMonthDay } from "../../tool/date";
+import { ComponentView } from "./type";
 
-import JmInput from '../input';
+import JmInput from "../input";
 
-import JmPickerDays from './components/picker-days.vue'
+import JmPickerDays from "./components/picker-days.vue";
+
+// 0 一月份
+// 1 二月份
+// 2 三月份
 
 @Component<JmDatePicker>({
-    components:{
+    components: {
         JmInput,
         JmPickerDays
     }
 })
 export default class JmDatePicker extends Vue {
-
     // 日期
     @Prop({
         type: Date,
         default: () => new Date()
     })
-    public value !: Date
+    public value!: Date;
 
     // 类型
     @Prop({
         type: String,
         default: ComponentView.DAYS
     })
-    public type !: ComponentView
-
+    public type!: ComponentView;
 
     public visible = false;
 
@@ -53,7 +56,7 @@ export default class JmDatePicker extends Vue {
     public get isComponent() {
         switch (this.type) {
             case ComponentView.DAYS:
-                return 'JmPickerDays'
+                return "JmPickerDays";
         }
     }
 
@@ -66,14 +69,16 @@ export default class JmDatePicker extends Vue {
         const [year, month, day] = getYearMonthDay(this.value);
         return `${year}-${month + 1}-${day}`;
     }
-    
+
     public set dateValue(datValue: string) {
         const reg = /(\d+)-(\d+)-(\d+)/;
         const matched = datValue.match(reg);
         if (matched) {
             const [, year, month, day] = matched.map(Number);
-            this.$emit('input', new Date(year, month+1, day));
+            this.$emit("input", new Date(year, month + 1, day));
         }
+
+        console.log("pppp");
     }
 
     public handelFocus() {
@@ -95,7 +100,6 @@ export default class JmDatePicker extends Vue {
     box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.2);
     display: inline-block;
     border-radius: 6px;
-
 }
 
 .fade-enter-active,
