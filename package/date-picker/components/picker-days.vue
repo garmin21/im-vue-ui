@@ -10,7 +10,9 @@
                     alt="leftArrow"
                 />
             </span>
-            <span :class="[`${prefixcls}__header__text`]">{{ dateValue }}</span>
+            <span :class="[`${prefixcls}__header__text`]">
+                {{ spitDateValue }}
+            </span>
             <span :class="[`arrow`, `${prefixcls}__right-arrow`]">
                 <img
                     class="right-arrow"
@@ -78,6 +80,11 @@ export default class JmPickerDays extends Vue implements Props {
     public get classes() {
         const { prefixcls } = this;
         return [`${prefixcls}__picker__days`];
+    }
+
+    public get spitDateValue() {
+        const [y, m, r] = this.dateValue.split("-");
+        return `${y} 年${m} 月${r} 日`;
     }
 
     public get isGroup() {
