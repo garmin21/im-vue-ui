@@ -3,7 +3,7 @@
         <h1>date-picker</h1>
         <section>
             <h3>基本使用，选择日期</h3>
-            <JmDatePicker :type="days" :value="value" @input="getDate" />
+            <JmDatePicker :type="days" v-model="value" />
         </section>
     </div>
 </template>
@@ -21,10 +21,6 @@ export default class ExampleDatePicker extends Vue {
 
     public get days() {
         return ComponentView.DAYS;
-    }
-
-    public getDate(date: Date) {
-        this.value = date;
     }
 }
 </script>

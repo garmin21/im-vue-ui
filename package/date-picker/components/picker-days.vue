@@ -40,6 +40,7 @@
                     ]"
                     v-for="(day, index) of getDays"
                     :key="`${day}-${index}`"
+                    @click="handelClickday(day)"
                 >
                     {{ getDay(day) }}
                 </div>
@@ -54,9 +55,11 @@ import { PREFIXCLS } from "../../theme-chalk/var";
 import { Props, DateStore } from "../type";
 import {
     getYearMonthDay,
-    getPrevMonthLastDay
-    // getCurrentMonthLastDay
+    getPrevMonthLastDay,
+    getCurrentMonthLastDay
 } from "../../../tool/date";
+import { getParentGroup } from "../../../tool/group";
+import JmDatePicker from "../date-picker.vue";
 
 @Component<JmPickerDays>({})
 export default class JmPickerDays extends Vue implements Props {
@@ -77,21 +80,28 @@ export default class JmPickerDays extends Vue implements Props {
         return [`${prefixcls}__picker__days`];
     }
 
+    public get isGroup() {
+        return getParentGroup<JmDatePicker>(this, "JmDatePicker");
+    }
+
     public get getDays() {
         const [year, month] = getYearMonthDay(this.dateValue);
-
-        console.log(year, month, 1); // 2021 7 1 是星期几
-        // 0~6 0:表示星期天
+        // 0 ~ 6 0:表示星期天
         let startWeek = new Date(year, month, 1).getDay();
         if (startWeek === 0) {
             startWeek = 7;
         }
         // 获取上个月的天数
         const prevMonthDay = getPrevMonthLastDay(year, month);
-        // 获取当前月份的天数
-        // const curLastDay = getCurrentMonthLastDay(year, month);
 
-        return [...this.getPrevMonthDays(prevMonthDay, startWeek)];
+        // 获取当前月份的天数
+        const curLastDay = getCurrentMonthLastDay(year, month);
+
+        return [
+            ...this.getPrevMonthDays(prevMonthDay, startWeek),
+            ...this.getCurrentMonthDays(curLastDay),
+            ...this.getNextMonthDays(curLastDay, startWeek)
+        ];
     }
 
     public getPrevMonthDays(days: number, week: number) {
@@ -104,6 +114,34 @@ export default class JmPickerDays extends Vue implements Props {
             });
         }
         return prevMonthDays;
+    }
+
+    public getCurrentMonthDays(curLastDay: number) {
+        const [year, month] = getYearMonthDay(this.dateValue);
+        const curMonthDays: DateStore[] = [];
+        for (let i = 1; i <= curLastDay; i++) {
+            curMonthDays.push({
+                date: new Date(year, month, i),
+                status: "current"
+            });
+        }
+        return curMonthDays;
+    }
+
+    public getNextMonthDays(curLastDay: number, startWeek: number) {
+        const [year, month] = getYearMonthDay(this.dateValue);
+        const nextMonthDays: DateStore[] = [];
+        for (let i = 1; i <= 42 - startWeek - curLastDay + 1; i++) {
+            nextMonthDays.push({
+                date: new Date(year, month + 1, i),
+                status: "next"
+            });
+        }
+        return nextMonthDays;
+    }
+
+    public handelClickday(dateStore: DateStore) {
+        this.isGroup && this.isGroup.$emit("input", dateStore.date);
     }
 
     public getDay(dateStore: DateStore) {
@@ -191,22 +229,22 @@ export default class JmPickerDays extends Vue implements Props {
 }
 
 .@{--prefixcls}__cell--prev {
+    color: @--text-input;
 }
 
 .@{--prefixcls}__cell--next {
+    color: @--text-input;
 }
 
 .@{--prefixcls}__cell--active {
+    background-color: @--hover-primary;
+    color: @--color-global;
+    &:hover {
+        background-color: @--hover-primary;
+    }
 }
 
 .@{--prefixcls}__cell--today {
+    // color: @--hover-primary;
 }
-
-// .@{--prefixcls}__left-arrow {
-//     // padding-left: 16px;
-// }
-
-// .@{--prefixcls}__right-arrow {
-//     // padding-right: 16px;
-// }
 </style>

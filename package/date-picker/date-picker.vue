@@ -1,11 +1,9 @@
 <template>
-    <div :class="classes">
-        {{ dateValue }}
-        <JmInput v-model="dateValue" @focus="handelFocus" @blur="handelBlur" />
+    <div :class="classes" v-clickoutside="handelBlur">
+        <JmInput v-model="dateValue" @focus="handelFocus" />
         <transition name="fade">
-            <!-- v-if="visible" -->
             <!-- 这里到时候换成 popover  -->
-            <div :class="[`${prefixcls}__picker--visible`]">
+            <div v-if="visible" :class="[`${prefixcls}__picker--visible`]">
                 <component :is="isComponent" :dateValue="dateValue" />
             </div>
         </transition>
@@ -22,6 +20,8 @@ import JmInput from "../input";
 
 import JmPickerDays from "./components/picker-days.vue";
 
+import clickoutside from "../../tool/clickoutside";
+
 // 0 一月份
 // 1 二月份
 // 2 三月份
@@ -30,6 +30,9 @@ import JmPickerDays from "./components/picker-days.vue";
     components: {
         JmInput,
         JmPickerDays
+    },
+    directives: {
+        clickoutside
     }
 })
 export default class JmDatePicker extends Vue {
@@ -77,8 +80,6 @@ export default class JmDatePicker extends Vue {
             const [, year, month, day] = matched.map(Number);
             this.$emit("input", new Date(year, month + 1, day));
         }
-
-        console.log("pppp");
     }
 
     public handelFocus() {
@@ -94,12 +95,20 @@ export default class JmDatePicker extends Vue {
 <style lang="less" scoped>
 @import "../theme-chalk/var.less";
 
+.@{--prefixcls}__date__picker {
+    position: relative;
+}
+
 .@{--prefixcls}__picker--visible {
     padding: 20px;
-    height: 100%;
     box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.2);
     display: inline-block;
     border-radius: 6px;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 36px;
+    z-index: 10;
+    background-color: @--color-global;
 }
 
 .fade-enter-active,
