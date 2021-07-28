@@ -171,10 +171,6 @@ export default class JmPickerDays extends Vue implements Props {
         const [y2, m2, d2] = getYearMonthDay();
         return y1 === y2 && m1 === m2 && d1 === d2;
     }
-
-    public log(value: any) {
-        console.log(value);
-    }
 }
 </script>
 
