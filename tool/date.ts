@@ -22,6 +22,6 @@ export const getPrevMonthLastDay = (year: number, month: number) => {
 };
 
 // https://stackoverflow.com/a/1090817/12819402
-export const cloneDate = (date) => {
+export const cloneDate = (date:Date) => {
     return new Date(date.getTime());
 };
