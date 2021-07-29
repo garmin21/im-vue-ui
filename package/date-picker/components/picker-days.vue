@@ -84,7 +84,7 @@ export default class JmPickerDays extends Vue implements Props {
 
     public get spitDateValue() {
         const [y, m, r] = this.dateValue.split("-");
-        return `${y} 年${m} 月${r} 日`;
+        return `${y}年${m}月${r}日`;
     }
 
     public get isGroup() {
@@ -127,6 +127,7 @@ export default class JmPickerDays extends Vue implements Props {
         const [year, month] = getYearMonthDay(this.dateValue);
         const curMonthDays: DateStore[] = [];
         for (let i = 1; i <= curLastDay; i++) {
+            console.log(year, month);
             curMonthDays.push({
                 date: new Date(year, month, i),
                 status: "current"

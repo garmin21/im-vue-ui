@@ -1,4 +1,3 @@
-// 获取年月日
 export const getYearMonthDay = (value?: Date | string) => {
     const date = value ? new Date(value) : new Date();
     const day = date.getDate();
@@ -10,7 +9,6 @@ export const getYearMonthDay = (value?: Date | string) => {
 // https://stackoverflow.com/a/13773408/12819402
 // https://www.cnblogs.com/liufulin/p/10206730.html
 // 获取一个月有多少天
-// new Date()第3个参数默认为1，就是每个月的1号，把它设置为0时， new Date()会返回上一个月的最后一天，然后通过getDate()方法得到天数
 export const getCurrentMonthLastDay = (year: number, month: number) => {
     return new Date(year, month + 1, 0).getDate();
 };
@@ -22,6 +20,33 @@ export const getPrevMonthLastDay = (year: number, month: number) => {
 };
 
 // https://stackoverflow.com/a/1090817/12819402
-export const cloneDate = (date:Date) => {
+export const cloneDate = (date: Date) => {
     return new Date(date.getTime());
 };
+
+/**
+ *
+一月 Jan. January
+
+二月 Feb. February
+
+三月 Mar. March
+
+四月 Apr. April
+
+五月 May. May
+
+六月 Jun. June
+
+七月 Jul. July
+
+八月 Aug. August
+
+九月 Sept. September
+
+十月 Oct. October
+
+十一月 Nov. November
+
+十二月 Dec. December
+ */
