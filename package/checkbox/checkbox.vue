@@ -1,8 +1,8 @@
 <template>
     <label @click="handleClick" :class="classes">
-        <span class="jm-checkbox__input">
-            <span class="jm-checkout__inner"> </span>
-            <span class="jm-checkout__label">
+        <span :class="[`${prefixcls}__checkbox__input`]">
+            <span :class="[`${prefixcls}__checkout__inner`]"> </span>
+            <span :class="[`${prefixcls}__checkout__label`]">
                 <slot></slot>
                 <template v-if="!$slots.default">{{ label }}</template>
             </span>
@@ -15,6 +15,8 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import { getParentGroup } from "../../tool/group";
 import JmCheckBoxGroup from "./checkbox-group.vue";
 import { CheckboxResult } from "./index";
+
+import { PREFIXCLS } from '../theme-chalk/var'
 
 
 /**
@@ -34,14 +36,18 @@ export default class JmCheckBox extends Vue {
     @Prop({ type: Boolean })
     public indeterminate?: boolean;
 
+
+    public get prefixcls() {
+        return PREFIXCLS;
+    }
+
     public get classes() {
+        const { prefixcls, checked, disabled, indeterminate } = this;
         return [
-            "jm-checkbox",
-            {
-                checked: this.checked,
-                disabled: this.disabled,
-                indeterminate: this.indeterminate && !this.checked
-            }
+            `${prefixcls}__checkbox`,
+            checked ? `${prefixcls}__checkbox--checked`: ``,
+            disabled ? `${prefixcls}__checkbox--disabled` : ``,
+            indeterminate && !checked ? `${prefixcls}__checkbox--indeterminate` : ``
         ];
     }
 
@@ -82,9 +88,14 @@ export default class JmCheckBox extends Vue {
 </script>
 
 <style lang="less" scoped>
-@import "../theme-chalk/config.less";
+@import '../theme-chalk/var.less';
 
-.jm-checkout__inner {
+.@{--prefixcls}__checkbox__input {
+    display: flex;
+    align-items: center;
+}
+
+.@{--prefixcls}__checkout__inner {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,56 +107,41 @@ export default class JmCheckBox extends Vue {
     box-sizing: border-box;
 }
 
-.jm-checkbox {
+.@{--prefixcls}__checkout__label {
+    padding-left: 8px;
+}
+
+.@{--prefixcls}__checkbox {
     display: inline-flex;
     font-size: 14px;
     color: #333;
     cursor: pointer;
+}
 
-    &.checked {
-        .jm-checkout__inner {
-            border: none;
-            background: @--theme-color url("./icons/check.svg");
-            background-position: center center;
-            background-repeat: repeat;
-        }
-    }
-
-    &.indeterminate {
-        .jm-checkout__inner {
-            border: none;
-            background: @--theme-color url("./icons/half-check.svg");
-            background-position: center center;
-            background-repeat: repeat;
-        }
-    }
-
-    &.disabled {
-        color: #c0c4cc;
-        opacity: 0.6;
-        cursor: not-allowed;
-
-        .jm-checkout__inner {
-            background-color: #c0c4cc;
-        }
+.@{--prefixcls}__checkbox--checked {
+    .@{--prefixcls}__checkout__inner {
+        border: none;
+        background: #f60 url("./icons/check.svg");
+        background-position: center center;
+        background-repeat: repeat;
     }
 }
 
-.jm-checkbox-img {
-    -webkit-tap-highlight-color: transparent;
-    -moz-user-select: none; /* 火狐 */
-    -webkit-user-select: none; /* webkit浏览器 */
-    -ms-user-select: none; /* IE10 */
-    -khtml-user-select: none; /* 早期浏览器 */
-    user-select: none;
+.@{--prefixcls}__checkbox--disabled {
+    color: #c0c4cc;
+    opacity: 0.6;
+    cursor: not-allowed;
+    .@{--prefixcls}__checkout__inner {
+        background-color: #c0c4cc;
+    }
 }
 
-.jm-checkbox__input {
-    display: flex;
-    align-items: center;
-}
-
-.jm-checkout__label {
-    padding-left: 8px;
+.@{--prefixcls}__checkbox--indeterminate {
+    .@{--prefixcls}__checkout__inner {
+        border: none;
+        background: #f60 url("./icons/half-check.svg");
+        background-position: center center;
+        background-repeat: repeat;
+    }
 }
 </style>
