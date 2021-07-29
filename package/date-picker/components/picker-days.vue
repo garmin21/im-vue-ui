@@ -240,7 +240,7 @@ export default class JmPickerDays extends Vue implements Props {
     }
 }
 
-.@{--prefixcls}__cell--today {
-    // color: @--hover-primary;
-}
+// .@{--prefixcls}__cell--today {
+//     // color: @--hover-primary;
+// }
 </style>

@@ -72,7 +72,8 @@ export default class JmDatePicker extends Vue {
         const [year, month, day] = getYearMonthDay(this.value);
         return `${year}-${month + 1}-${day}`;
     }
-
+    // 需求：日期格式化类
+    // 封装一个输入框个格式化的类处理
     public set dateValue(datValue: string) {
         const reg = /(\d+)-(\d+)-(\d+)/;
         const matched = datValue.match(reg);
