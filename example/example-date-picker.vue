@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component , Watch} from "vue-property-decorator";
 import JmDatePicker, { ComponentView } from "../package/date-picker";
 @Component({
     components: {
@@ -21,6 +21,11 @@ export default class ExampleDatePicker extends Vue {
 
     public get days() {
         return ComponentView.DAYS;
+    }
+
+    @Watch('value')
+    public watchValue(val:Date) {
+        console.log(val)
     }
 }
 </script>
