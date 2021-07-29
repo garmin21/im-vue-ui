@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import { PREFIXCLS } from '../theme-chalk/var';
 
 @Component({})
 export default class JmCollapse extends Vue {
@@ -23,8 +24,14 @@ export default class JmCollapse extends Vue {
     @Prop({ type: Boolean, default: false })
     public accordion!: boolean;
 
+
+    public get prefixcls() {
+        return PREFIXCLS;
+    }
+
     public get classes() {
-        return [`jm-collapse`];
+        const { prefixcls } = this;
+        return [`${prefixcls}__collapse`];
     }
 
     public $updateValue(name: string) {
@@ -46,7 +53,9 @@ export default class JmCollapse extends Vue {
 </script>
 
 <style lang="less" scoped>
-.jm-collapse {
+@import '../theme-chalk/var.less';
+
+.@{--prefixcls}__collapse {
     padding: 20px;
 }
 </style>
