@@ -1,12 +1,11 @@
 <template>
     <label
         @click="handleClick"
-        class="jm-radio"
-        :class="[checked ? 'jm-checked' : '', disabled ? 'Jm-disabled' : '']"
+        :class="classes"
     >
-        <span class="jm-radio__input">
-            <span class="jm-radio__inner" />
-            <span class="jm-radio__label">
+        <span :class="[`${prefixcls}__radio__input`]">
+            <span :class="[`${prefixcls}__radio__inner`]" />
+            <span :class="[`${prefixcls}__radio__label`]">
                 <slot />
                 <template v-if="!$slots.default">{{ label }}</template>
             </span>
@@ -18,7 +17,8 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { getParentGroup } from "../../tool/group";
 import JmRadioGroup from "./group.vue";
-import { RadioValue, RadioItem } from "./index";
+import { RadioValue, RadioItem } from "./type";
+import { PREFIXCLS } from '../theme-chalk/var';
 
 @Component<JmRadio>({})
 export default class JmRadio extends Vue {
@@ -37,6 +37,19 @@ export default class JmRadio extends Vue {
     public item?: RadioItem;
 
     public parent: JmRadioGroup | null = null;
+
+    public get prefixcls() {
+        return PREFIXCLS;
+    }
+
+    public get classes() {
+        const { prefixcls, checked, disabled } = this;
+        return [
+            `${prefixcls}__radio`,
+            checked ? `${prefixcls}__radio--checked` : ``,
+            disabled ? `${prefixcls}__radio--disabled` : ``
+        ]
+    }
 
     public get checked() {
         if (this.isGroup) {
@@ -68,40 +81,40 @@ export default class JmRadio extends Vue {
 </script>
 
 <style lang="less" scoped>
-@import "../theme-chalk/config.less";
+@import '../theme-chalk/var.less';
 
-.jm-radio {
+.@{--prefixcls}__radio {
     display: inline-flex;
     cursor: pointer;
 }
 
-.jm-radio__input {
+.@{--prefixcls}__radio__input {
     display: flex;
     align-items: center;
     font-size: 14px;
     color: #333;
 }
 
-.jm-radio__inner {
+.@{--prefixcls}__radio__inner {
     width: 18px;
     height: 18px;
     box-sizing: border-box;
     border-radius: 50%;
     border: 1px solid #ccc;
-    background-color: #fff;
+    background-color: @--color-global;
 }
 
-.jm-radio__label {
+.@{--prefixcls}__radio__label {
     margin-left: 5px;
 }
 
-.jm-checked {
+.@{--prefixcls}__radio--checked {
     .jm-radio__inner {
-        border: 5px solid @--theme-color;
+        border: 5px solid #f60;
     }
 }
 
-.Jm-disabled {
+.@{--prefixcls}__radio--disabled {
     color: #c0c4cc;
     opacity: 0.6;
     cursor: not-allowed;

@@ -1,12 +1,7 @@
 import JmRadio from './radio.vue';
 import JmRadioGroup from './group.vue';
-export type RadioValue = number | boolean | string;
+import { RadioItem, RadioValue } from './type';
 
-export interface RadioItem {
-    label: string;
-    value: RadioValue
-}
-
-export { JmRadioGroup }
+export { JmRadioGroup, RadioValue,  RadioItem}
 
 export default JmRadio

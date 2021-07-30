@@ -31,11 +31,10 @@ export default class JmSwitch extends Vue {
     }
 
     public get classes() {
+        const { prefixcls,disabled } = this;
         return [
-            `${this.prefixcls}__switch`,
-            {
-                [`${this.prefixcls}__switch--disabled`]: this.disabled
-            }
+            `${prefixcls}__switch`,
+            disabled ? `${this.prefixcls}__switch--disabled` : ``
         ];
     }
 

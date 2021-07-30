@@ -2,7 +2,7 @@
     <transition :name="`fade-${direction}`">
         <div :class="classes" v-if="visible">
             <div class="mark" @click.stop="handelClose"></div>
-            <div :class="`container-${direction}`">
+            <div :class="[`${prefixcls}__container--${direction}`]">
                 <slot />
             </div>
         </div>
@@ -12,7 +12,9 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { PREFIXCLS } from "../theme-chalk/var";
-@Component({})
+
+
+@Component<JmDrawer>({})
 export default class JmDrawer extends Vue {
     @Prop({ type: Boolean, default: false })
     public visible!: boolean;
@@ -26,8 +28,13 @@ export default class JmDrawer extends Vue {
     })
     public direction!: string;
 
+    public get prefixcls() {
+        return PREFIXCLS;
+    }
+
     public get classes() {
-        return [`${PREFIXCLS}-drawer`];
+        const { prefixcls } = this;
+        return [`${prefixcls}__drawer`];
     }
 
     public handelClose() {
@@ -38,7 +45,7 @@ export default class JmDrawer extends Vue {
 
 <style lang="less" scoped>
 @import "../theme-chalk/config.less";
-.@{--prefixcls}-drawer {
+.@{--prefixcls}__drawer {
     position: fixed;
     top: 0;
     left: 0;
@@ -53,10 +60,10 @@ export default class JmDrawer extends Vue {
     bottom: 0;
     left: 0;
     z-index: 3;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
 }
 
-.container-left {
+.@{--prefixcls}__container--left {
     position: fixed;
     top: 0;
     left: 0;
@@ -66,7 +73,7 @@ export default class JmDrawer extends Vue {
     background-color: white;
 }
 
-.container-bottom {
+.@{--prefixcls}__container--bottom {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -76,7 +83,7 @@ export default class JmDrawer extends Vue {
     background-color: white;
 }
 
-.container-right {
+.@{--prefixcls}__container--right {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -86,7 +93,7 @@ export default class JmDrawer extends Vue {
     background-color: white;
 }
 
-.container-top {
+.@{--prefixcls}__container--top {
     position: fixed;
     top: 0;
     left: 0;
@@ -99,6 +106,7 @@ export default class JmDrawer extends Vue {
 .fade-left-enter,
 .fade-left-leave-to {
     transform: translateX(-100%);
+    opacity: 0;
 }
 
 .fade-left-enter-active,
@@ -109,6 +117,7 @@ export default class JmDrawer extends Vue {
 .fade-right-enter,
 .fade-right-leave-to {
     transform: translateX(100%);
+    opacity: 0;
 }
 
 .fade-right-enter-active,
@@ -119,6 +128,7 @@ export default class JmDrawer extends Vue {
 .fade-top-enter,
 .fade-top-leave-to {
     transform: translateY(-100%);
+    opacity: 0;
 }
 
 .fade-top-enter-active,
@@ -129,6 +139,7 @@ export default class JmDrawer extends Vue {
 .fade-bottom-enter,
 .fade-bottom-leave-to {
     transform: translateY(100%);
+    opacity: 0;
 }
 
 .fade-bottom-enter-active,

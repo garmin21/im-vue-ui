@@ -117,6 +117,11 @@ export const routes: Array<RouteConfig> = [
                 path: 'input',
                 name: 'input',
                 component:() => import(/* input */ '../example/example-input.vue').then(m => m.default)
+            },
+            {
+                path: 'drawer',
+                name: 'drawer',
+                component: () => import(/* drawer */ '../example/example-drawer.vue').then(m => m.default)
             }
         ]
     }
