@@ -93,7 +93,6 @@ export default class JmButton extends Vue {
 </script>
 
 <style lang="less" scoped>
-
 @import '../theme-chalk/var.less';
 
 .@{--prefixcls}__button {

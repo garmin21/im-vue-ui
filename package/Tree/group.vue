@@ -41,4 +41,3 @@ export default class JmTreeGroup extends Vue {
     }
 }
 </script>
-<style lang="less" scoped></style>

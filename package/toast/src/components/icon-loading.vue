@@ -62,8 +62,6 @@ export default class IconLoading extends Vue {}
 </script>
 
 <style lang="less" scoped>
-@import "../../../theme-chalk/toast.less";
-
 .fm-v3-dialog-icon-loading {
     width: 20px;
     height: 20px;

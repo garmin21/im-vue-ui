@@ -31,9 +31,9 @@ import { Component } from "vue-property-decorator";
 export default class IconWarning extends Vue {}
 </script>
 <style lang="less" scoped>
-@import "../../../theme-chalk/toast.less";
+@import "../../../theme-chalk/var.less";
 
 .fm-v3-dialog-icon-warning {
-    fill: @icon-color-warning;
+    fill: @--color-warning;
 }
 </style>

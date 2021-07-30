@@ -31,9 +31,9 @@ import { Component } from "vue-property-decorator";
 export default class IconError extends Vue {}
 </script>
 <style lang="less" scoped>
-@import "../../../theme-chalk/toast.less";
+@import "../../../theme-chalk/var.less";
 
 .fm-v3-dialog-icon-error {
-    fill: @icon-color-error;
+    fill: @--color-error;
 }
 </style>
