@@ -48,9 +48,7 @@ export default class ImageViewer extends Vue {
         this.$el.remove();
     }
 
-    public onImageLoad(evt: Event) {
-        console.log(evt, "图片加载完成");
-    }
+    public onImageLoad(evt: Event) {}
 }
 </script>
 
