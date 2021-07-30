@@ -4,6 +4,7 @@
         <section>
             <h3>基本使用</h3>
             <JmSwitch v-model="open" />
+            {{ open }}
         </section>
     </div>
 </template>
@@ -17,6 +18,6 @@ import JmSwitch from "../package/switch";
     }
 })
 export default class ExampleSwitch extends Vue {
-    public open = "1111";
+    public open = 1;
 }
 </script>

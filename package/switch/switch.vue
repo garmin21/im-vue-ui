@@ -14,11 +14,12 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { PREFIXCLS } from "../theme-chalk/var";
+import { SwitchVale } from './type';
 
 @Component<JmSwitch>({})
 export default class JmSwitch extends Vue {
     @Prop({ type: [Boolean, Number, String], default: false })
-    public value!: boolean;
+    public value!: SwitchVale;
 
     @Prop({ type: String, default: "checkbox" })
     public name!: string;
@@ -41,8 +42,25 @@ export default class JmSwitch extends Vue {
     public handelChecked(evt: InputEvent) {
         if (evt.target) {
             const { checked } = evt.target as HTMLInputElement;
-            this.$emit("input", checked);
+            if(typeof this.value === 'object') return;
+            const value = this.switchInput(checked);
+            this.$emit("input", value);
         }
+    }
+
+    // 默认 布尔
+    public switchInput(checked: boolean) {
+        if(typeof this.value === 'boolean') {
+            return checked
+        }
+        if(typeof this.value === 'number') {
+            return checked ? 1 : 0;
+        }
+        // string 有点小问题
+        if(typeof this.value === 'string') {
+            return checked ? checked : ''
+        }
+        return checked;
     }
 }
 </script>

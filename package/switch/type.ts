@@ -1,0 +1,1 @@
+export type SwitchVale = number | string | boolean;
