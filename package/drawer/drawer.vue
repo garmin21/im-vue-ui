@@ -1,8 +1,16 @@
 <template>
     <transition :name="`fade-${direction}`">
         <div :class="classes" v-if="visible">
-            <div class="mark" @click.stop="handelClose"></div>
-            <div :class="[`${prefixcls}__container--${direction}`]">
+            <div
+                :class="[`${prefixcls}__drawer__mark`]"
+                @click.stop="handelClose"
+            ></div>
+            <div
+                :class="[
+                    `${prefixcls}__container`,
+                    `${prefixcls}__container--${direction}`
+                ]"
+            >
                 <slot />
             </div>
         </div>
@@ -12,7 +20,6 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { PREFIXCLS } from "../theme-chalk/var";
-
 
 @Component<JmDrawer>({})
 export default class JmDrawer extends Vue {
@@ -40,6 +47,19 @@ export default class JmDrawer extends Vue {
     public handelClose() {
         this.$emit("close");
     }
+
+    public handelKeyDown(evt: KeyboardEvent) {
+        if (evt.key === "Escape") {
+            this.$emit("update:visible", false);
+        }
+    }
+
+    public mounted() {
+        document.addEventListener("keydown", this.handelKeyDown);
+        this.$on("hook:beforeDestroy", () => {
+            document.removeEventListener("keydown", this.handelKeyDown);
+        });
+    }
 }
 </script>
 
@@ -53,7 +73,7 @@ export default class JmDrawer extends Vue {
     height: 100%;
 }
 
-.mark {
+.@{--prefixcls}__drawer__mark {
     position: fixed;
     top: 0;
     right: 0;
@@ -63,44 +83,38 @@ export default class JmDrawer extends Vue {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.@{--prefixcls}__container--left {
+.@{--prefixcls}__container {
     position: fixed;
+    z-index: 4;
+    background-color: white;
+}
+
+.@{--prefixcls}__container--left {
     top: 0;
     left: 0;
-    z-index: 4;
     width: calc(100% - 60%);
     height: 100%;
-    background-color: white;
 }
 
 .@{--prefixcls}__container--bottom {
-    position: fixed;
     right: 0;
     bottom: 0;
-    z-index: 4;
     width: 100%;
     height: calc(100% - 60%);
-    background-color: white;
 }
 
 .@{--prefixcls}__container--right {
-    position: fixed;
     right: 0;
     bottom: 0;
-    z-index: 4;
     width: calc(100% - 60%);
     height: 100%;
-    background-color: white;
 }
 
 .@{--prefixcls}__container--top {
-    position: fixed;
     top: 0;
     left: 0;
-    z-index: 4;
     width: 100%;
     height: calc(100% - 60%);
-    background-color: white;
 }
 
 .fade-left-enter,

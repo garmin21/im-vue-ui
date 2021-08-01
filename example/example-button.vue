@@ -3,7 +3,7 @@
         <h1>Button</h1>
         <section>
             <h3>按钮类型</h3>
-            <JmButton type="primary">主要按钮</JmButton>
+            <JmButton type="primary" @click="click"> 主要按钮 </JmButton>
             <JmButton type="info">信息</JmButton>
             <JmButton type="default">默认</JmButton>
             <JmButton type="error">异常</JmButton>
@@ -43,10 +43,7 @@
         <section>
             <h3>图标按钮</h3>
             <JmButton type="primary">
-                <img
-                    src="../src/assets/logo.png"
-                    width="20"
-                    height="20">
+                <img src="../src/assets/logo.png" width="20" height="20" />
                 <span>图标按钮</span>
             </JmButton>
         </section>
@@ -84,5 +81,9 @@ import JmButton from "../package/button";
         JmButton
     }
 })
-export default class ExampleButton extends Vue {}
+export default class ExampleButton extends Vue {
+    public click() {
+        console.log("object :>> ");
+    }
+}
 </script>

@@ -8,9 +8,9 @@ export const routes: Array<RouteConfig> = [
         path: "/",
         name: "main",
         component: () =>
-            import(/*main*/ "./main.vue").then((m) => {
-                console.log(m, "---> 模块信息 <---");
-                return m.default;
+            import(/*main*/ "./main.vue").then((v) => {
+                console.log(v, "---> 模块信息 <---");
+                return v.default;
             })
     },
     {
@@ -18,14 +18,14 @@ export const routes: Array<RouteConfig> = [
         name: "example",
         redirect: "/example/upload",
         component: () =>
-            import(/* example */ "./example.vue").then((m) => m.default),
+            import(/* example */ "./example.vue").then((v) => v.default),
         children: [
             {
                 path: "upload",
                 name: "upload",
                 component: () =>
                     import(/* upload */ "../example/example-upload.vue").then(
-                        (m) => m.default
+                        (v) => v.default
                     )
             },
             {
@@ -33,7 +33,7 @@ export const routes: Array<RouteConfig> = [
                 name: "image",
                 component: () =>
                     import(/* image */ "../example/example-image.vue").then(
-                        (m) => m.default
+                        (v) => v.default
                     )
             },
             {
@@ -41,7 +41,7 @@ export const routes: Array<RouteConfig> = [
                 name: "switch",
                 component: () =>
                     import(/* switch */ "../example/example-switch.vue").then(
-                        (m) => m.default
+                        (v) => v.default
                     )
             },
             {
@@ -49,7 +49,7 @@ export const routes: Array<RouteConfig> = [
                 name: "message",
                 component: () =>
                     import(/* message */ "../example/example-message.vue").then(
-                        (m) => m.default
+                        (v) => v.default
                     )
             },
             {
@@ -57,7 +57,7 @@ export const routes: Array<RouteConfig> = [
                 name: "button",
                 component: () =>
                     import(/* button */ "../example/example-button.vue").then(
-                        (m) => m.default
+                        (v) => v.default
                     )
             },
             {
@@ -66,7 +66,7 @@ export const routes: Array<RouteConfig> = [
                 component: () =>
                     import(
                         /* input-number */ "../example/example-input-number.vue"
-                    ).then((m) => m.default)
+                    ).then((v) => v.default)
             },
             {
                 path: "checkbox",
@@ -74,7 +74,7 @@ export const routes: Array<RouteConfig> = [
                 component: () =>
                     import(
                         /* checkbox */ "../example/example-checkbox.vue"
-                    ).then((m) => m.default)
+                    ).then((v) => v.default)
             },
             {
                 path: "collapse",
@@ -82,7 +82,7 @@ export const routes: Array<RouteConfig> = [
                 component: () =>
                     import(
                         /* collapse */ "../example/example-collapse.vue"
-                    ).then((m) => m.default)
+                    ).then((v) => v.default)
             },
             {
                 path: "progress",
@@ -90,14 +90,14 @@ export const routes: Array<RouteConfig> = [
                 component: () =>
                     import(
                         /* progress */ "../example/example-progress.vue"
-                    ).then((m) => m.default)
+                    ).then((v) => v.default)
             },
             {
                 path: "tree",
                 name: "tree",
                 component: () =>
                     import(/* tree */ "../example/example-tree.vue").then(
-                        (m) => m.default
+                        (v) => v.default
                     )
             },
             {
@@ -105,23 +105,40 @@ export const routes: Array<RouteConfig> = [
                 name: "toast",
                 component: () =>
                     import(/* toast */ "../example/example-toast.vue").then(
-                        (m) => m.default
+                        (v) => v.default
                     )
             },
             {
-                path: 'date-picker',
-                name: 'date-picker',
-                component: () => import(/* date-picker */ '../example/example-date-picker.vue').then(m => m.default)
+                path: "date-picker",
+                name: "date-picker",
+                component: () =>
+                    import(
+                        /* date-picker */ "../example/example-date-picker.vue"
+                    ).then((v) => v.default)
             },
             {
-                path: 'input',
-                name: 'input',
-                component:() => import(/* input */ '../example/example-input.vue').then(m => m.default)
+                path: "input",
+                name: "input",
+                component: () =>
+                    import(/* input */ "../example/example-input.vue").then(
+                        (v) => v.default
+                    )
             },
             {
-                path: 'drawer',
-                name: 'drawer',
-                component: () => import(/* drawer */ '../example/example-drawer.vue').then(m => m.default)
+                path: "drawer",
+                name: "drawer",
+                component: () =>
+                    import(/* drawer */ "../example/example-drawer.vue").then(
+                        (v) => v.default
+                    )
+            },
+            {
+                path: "dropdown",
+                name: "dropdown",
+                component: () =>
+                    import(
+                        /* dropdown */ "../example/example-dropdown.vue"
+                    ).then((v) => v.default)
             }
         ]
     }
