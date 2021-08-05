@@ -49,6 +49,20 @@
                 <code>esc 关闭</code>
             </JmDrawer>
         </section>
+
+        <section>
+            <h3>自定义头部</h3>
+            <JmButton @click="visible5 = !visible5">打开抽屉</JmButton>
+            <JmDrawer
+                :visible.sync="visible5"
+                @close="visible5 = false"
+                direction="left"
+                headerTitle="我是一个好人"
+            >
+                <h1>title</h1>
+                <code>slot: header</code>
+            </JmDrawer>
+        </section>
     </div>
 </template>
 
@@ -67,6 +81,7 @@ export default class ExampleDrawer extends Vue {
     public visible2 = false;
     public visible3 = false;
     public visible4 = false;
+    public visible5 = false;
 
     public render() {
         return this.$createElement("span", "Nihao");

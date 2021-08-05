@@ -11,6 +11,10 @@
                     `${prefixcls}__container--${direction}`
                 ]"
             >
+                <slot name="header" v-if="$slots.header" />
+                <header v-else :class="[`${prefixcls}__drawer__header`]">
+                    {{ headerTitle }}
+                </header>
                 <slot />
             </div>
         </div>
@@ -25,6 +29,9 @@ import { PREFIXCLS } from "../theme-chalk/var";
 export default class JmDrawer extends Vue {
     @Prop({ type: Boolean, default: false })
     public visible!: boolean;
+
+    @Prop({ type: String, default: "Title" })
+    public headerTitle!: string;
 
     @Prop({
         type: String,
@@ -81,6 +88,16 @@ export default class JmDrawer extends Vue {
     left: 0;
     z-index: 3;
     background: rgba(0, 0, 0, 0.5);
+}
+
+.@{--prefixcls}__drawer__header {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #f5f6f7;
 }
 
 .@{--prefixcls}__container {
