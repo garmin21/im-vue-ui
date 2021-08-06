@@ -6,9 +6,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { PREFIXCLS } from '../theme-chalk/var';
+import { PREFIXCLS } from "../theme-chalk/var";
 
-@Component({})
+/**
+ *  ? 支持手风琴模式
+ */
+
+@Component<JmCollapse>({})
 export default class JmCollapse extends Vue {
     @Prop({
         type: [Array, String],
@@ -20,10 +24,10 @@ export default class JmCollapse extends Vue {
 
     @Prop({ type: Boolean, default: true })
     public icon!: boolean;
+
     // 手风琴模式
     @Prop({ type: Boolean, default: false })
     public accordion!: boolean;
-
 
     public get prefixcls() {
         return PREFIXCLS;
@@ -45,7 +49,6 @@ export default class JmCollapse extends Vue {
             arr.splice(index, 1);
             this.$emit("input", arr);
         } else {
-            // todo 如何支持手风琴模式
             this.$emit("input", name);
         }
     }
@@ -53,7 +56,7 @@ export default class JmCollapse extends Vue {
 </script>
 
 <style lang="less" scoped>
-@import '../theme-chalk/var.less';
+@import "../theme-chalk/var.less";
 
 .@{--prefixcls}__collapse {
     padding: 20px;

@@ -1,2 +1,3 @@
-import JmCheckBoxGroup from '../checkbox/checkbox-group.vue';
+import JmCheckBoxGroup from "../checkbox/checkbox-group.vue";
+
 export default JmCheckBoxGroup;

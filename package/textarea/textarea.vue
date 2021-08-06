@@ -1,6 +1,8 @@
 <template>
-    <div class="jm-textarea" :class="[disabled ? 'jm-disabled' : '']">
-        <div class="jm__label" v-if="label">{{ label }}</div>
+    <div :class="classes">
+        <div :class="[`${prefixcls}__textarea__label`]" v-if="label">
+            {{ label }}
+        </div>
         <div class="jm__text">
             <textarea
                 class="jm__textarea__core"
@@ -25,8 +27,9 @@
 
 <script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
+import { PREFIXCLS } from "../theme-chalk/var";
 
-@Component({})
+@Component<JmTextArea>({})
 export default class JmTextArea extends Vue {
     // 设置占位提示文字
     @Prop({ type: String, default: "" })
@@ -61,6 +64,18 @@ export default class JmTextArea extends Vue {
 
     public textNum = "0";
 
+    public get prefixcls() {
+        return PREFIXCLS;
+    }
+
+    public get classes() {
+        const { prefixcls, disabled } = this;
+        return [
+            `${prefixcls}__textarea`,
+            disabled ? `${prefixcls}__textarea--disabled` : ``
+        ];
+    }
+
     public get style() {
         return {
             resize: this.autosize ? "vertical" : "none",
@@ -92,11 +107,13 @@ export default class JmTextArea extends Vue {
 </script>
 
 <style lang="less" scoped>
-.jm-textarea {
+@import "../theme-chalk/var.less";
+
+.@{--prefixcls}__textarea {
     background-color: #fff;
 }
 
-.jm__label {
+.@{--prefixcls}__textarea__label {
     display: inline-block;
     width: 80px;
     overflow: hidden;
@@ -151,11 +168,11 @@ export default class JmTextArea extends Vue {
     color: grey;
 }
 
-.jm-disabled {
+.@{--prefixcls}__textarea--disabled {
     cursor: not-allowed;
     color: #ccc;
 
-    .jm__label {
+    .@{--prefixcls}__textarea__label {
         color: #ccc;
     }
 }

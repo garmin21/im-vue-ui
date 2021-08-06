@@ -22,7 +22,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { Type, Size } from "./index";
-import { PREFIXCLS } from '../theme-chalk/var'
+import { PREFIXCLS } from "../theme-chalk/var";
 
 @Component<JmButton>({})
 export default class JmButton extends Vue {
@@ -93,7 +93,7 @@ export default class JmButton extends Vue {
 </script>
 
 <style lang="less" scoped>
-@import '../theme-chalk/var.less';
+@import "../theme-chalk/var.less";
 
 .@{--prefixcls}__button {
     display: inline-flex;
@@ -176,7 +176,7 @@ export default class JmButton extends Vue {
         width: 20px;
         height: 20px;
         cursor: default;
-        animation: __jm-button-loading-keyframes 0.5s infinite linear;
+        animation: loading-keyframes 0.5s infinite linear;
     }
 }
 
@@ -186,7 +186,7 @@ export default class JmButton extends Vue {
     align-items: center;
 }
 
-@keyframes __jm-button-loading-keyframes {
+@keyframes loading-keyframes {
     from {
         transform: rotate(0deg);
     }

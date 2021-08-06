@@ -1,13 +1,18 @@
 <template>
     <div :class="classes" :aria-disabled="disabled">
-        <div class="jm__label" @click="handleClick">
-            <div class="jm__label__title">{{ label }}</div>
-            <div class="jm__label__icon">
-                <span class="sub-title" v-if="subTitle">{{ subTitle }}</span>
+        <div :class="[`${prefixcls}__collapse__label`]" @click="handleClick">
+            <div :class="[`${prefixcls}__label--title`]">{{ label }}</div>
+            <div :class="[`${prefixcls}__label--icon`]">
+                <span
+                    :class="[`${prefixcls}__iocn--sub-title`]"
+                    v-if="subTitle"
+                >
+                    {{ subTitle }}
+                </span>
                 <img v-if="icon" :src="image" width="12" height="12" />
             </div>
         </div>
-        <div class="jm__value" v-show="active">
+        <div :class="[`${prefixcls}__collapse__value`]" v-show="active">
             <slot />
         </div>
     </div>
@@ -17,7 +22,9 @@
 import JmCollapse from "../collapse";
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { getParentGroup } from "../../tool/group";
-@Component({})
+import { PREFIXCLS } from "../theme-chalk/var";
+
+@Component<JmCollapseItem>({})
 export default class JmCollapseItem extends Vue {
     @Prop({ type: String, default: "" })
     public value!: string;
@@ -40,6 +47,10 @@ export default class JmCollapseItem extends Vue {
     @Prop({ type: Boolean, default: false })
     public disabled!: boolean;
 
+    public get prefixcls() {
+        return PREFIXCLS;
+    }
+
     public get icon() {
         if (this.isGroup) {
             return this.isGroup.icon;
@@ -58,11 +69,10 @@ export default class JmCollapseItem extends Vue {
     }
 
     public get classes() {
+        const { prefixcls, disabled } = this;
         return [
-            `jm-collapse-item`,
-            {
-                "jm-collapse-disabled": this.disabled
-            }
+            `${prefixcls}__collapse__item`,
+            disabled ? `${prefixcls}__collapse--disabled` : ``
         ];
     }
 
@@ -88,19 +98,21 @@ export default class JmCollapseItem extends Vue {
 </script>
 
 <style lang="less" scoped>
-.jm-collapse-item {
+@import "../theme-chalk/var.less";
+
+.@{--prefixcls}__collapse__item {
     border-bottom: 1px solid #f5f6f7;
     height: auto;
     background-color: #fff;
     cursor: pointer;
-
-    &.jm-collapse-disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-    }
 }
 
-.jm__label {
+.@{--prefixcls}__collapse--disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.@{--prefixcls}__collapse__label {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -109,7 +121,7 @@ export default class JmCollapseItem extends Vue {
     font-weight: 500;
 }
 
-.jm__value {
+.@{--prefixcls}__collapse__value {
     display: block;
     padding: 12px 26px;
     font-size: 14px;
@@ -118,12 +130,12 @@ export default class JmCollapseItem extends Vue {
     line-height: 1.5;
 }
 
-.jm__label__icon {
+.@{--prefixcls}__label--icon {
     display: inline-flex;
     align-items: center;
 }
 
-.sub-title {
+.@{--prefixcls}__iocn--sub-title {
     font-size: 14px;
 }
 </style>
