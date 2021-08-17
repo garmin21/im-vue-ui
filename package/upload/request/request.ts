@@ -24,7 +24,7 @@ const createdAxios = (options: UploadImageOption) => {
         xhr.addEventListener(
             "progress",
             (evt: ProgressEvent<XMLHttpRequestEventTarget>) => {
-                evt["percent"] = (evt.loaded / evt.total) * 100;
+                evt.percent = (evt.loaded / evt.total) * 100;
                 options.onProgress(evt);
             }
         );
